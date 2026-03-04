@@ -39,7 +39,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/worldcoin/world-design-system")
+            url = uri("https://maven.pkg.github.com/jaidensiu/world-design-system")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
