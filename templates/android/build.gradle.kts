@@ -19,6 +19,7 @@ dependencies {
     compileOnly("androidx.compose.runtime:runtime:1.6.1")
     compileOnly("androidx.compose.ui:ui-unit:1.6.1")
     compileOnly("androidx.compose.ui:ui-graphics:1.6.1")
+    compileOnly("androidx.compose.foundation:foundation:1.6.1")
 }
 
 kotlin {
