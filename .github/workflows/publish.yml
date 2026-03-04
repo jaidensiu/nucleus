@@ -3,6 +3,16 @@ name: Publish Design Tokens
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: Version bump type
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 permissions:
   contents: write
@@ -19,11 +29,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Find merged PR and determine bump type
+      - name: Determine bump type
         id: pr
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MANUAL_BUMP: ${{ inputs.bump }}
         run: |
+          # Manual dispatch — use the input directly
+          if [ -n "$MANUAL_BUMP" ]; then
+            echo "Manual dispatch with bump: $MANUAL_BUMP"
+            echo "bump=$MANUAL_BUMP" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Push to main — look up the merged PR
           SHA=$(git rev-parse HEAD)
           PR_JSON=$(gh pr list --search "$SHA" --state merged --json labels,number --limit 1)
 
