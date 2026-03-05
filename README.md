@@ -1,6 +1,6 @@
-# World Design System – Design Tokens
+# World Design System
 
-Cross-platform design tokens for the World App, built with [Style Dictionary](https://github.com/style-dictionary/style-dictionary).
+Cross-platform design tokens that define the foundational UI layer of World App.
 
 ## Architecture
 
