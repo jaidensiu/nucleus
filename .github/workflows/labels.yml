@@ -37,7 +37,7 @@ jobs:
           fi
 
           # No release label — check if token-related files changed
-          CHANGED=$(git diff --name-only origin/main...HEAD -- 'tokens/' 'formats/' 'config.mjs' 'templates/' || true)
+          CHANGED=$(git diff --name-only origin/main...HEAD -- 'tokens/' 'formats/' 'config.ts' 'templates/' || true)
 
           if [ -n "$CHANGED" ]; then
             echo "Token-related files changed but no release label found. Posting comment."

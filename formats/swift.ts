@@ -6,31 +6,30 @@
  * The consuming app bridges these to its own platform types.
  */
 
-function hexOnly(hex) {
+import type { Format, FormatFnArguments } from 'style-dictionary/types';
+import type { TypographyTokenValue } from './types.js';
+
+function hexOnly(hex: string): string {
   return hex.replace('#', '').toUpperCase();
 }
 
-function camelCase(path) {
+function camelCase(path: string[]): string {
   return path
     .map((p, i) => (i === 0 ? p : p.charAt(0).toUpperCase() + p.slice(1)))
     .join('');
 }
 
-function pascalCase(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
 /**
  * swift/wldColorDefaults – Standalone WDSColorPalette with String hex constants.
  */
-export const swiftColorDefaults = {
+export const swiftColorDefaults: Format = {
   name: 'swift/wldColorDefaults',
-  format: ({ dictionary }) => {
+  format: ({ dictionary }: FormatFnArguments) => {
     const tokens = dictionary.allTokens.filter((t) => t.$type === 'color');
 
     const lines = tokens.map((token) => {
       const name = camelCase(token.path);
-      const hex = hexOnly(token.$value || token.value);
+      const hex = hexOnly((token.$value || token.value) as string);
       return `    public static let ${name} = "${hex}"`;
     });
 
@@ -49,17 +48,17 @@ export const swiftColorDefaults = {
 /**
  * swift/wldColorTheme – Standalone LightTheme / DarkTheme with String hex constants.
  */
-export const swiftColorTheme = {
+export const swiftColorTheme: Format = {
   name: 'swift/wldColorTheme',
-  format: ({ dictionary, options }) => {
-    const structName = options.structName || 'WdsLightColorTokens';
+  format: ({ dictionary, options }: FormatFnArguments) => {
+    const structName = (options.structName as string) || 'WdsLightColorTokens';
     const tokens = dictionary.allTokens.filter(
       (t) => t.$type === 'color' && t.path[0] === 'semantic',
     );
 
     const lines = tokens.map((token) => {
       const name = camelCase(token.path.slice(1));
-      const hex = hexOnly(token.$value || token.value);
+      const hex = hexOnly((token.$value || token.value) as string);
       return `    public static let ${name} = "${hex}"`;
     });
 
@@ -78,16 +77,16 @@ export const swiftColorTheme = {
 /**
  * swift/wldFontDefaults – Standalone WdsTypography with WdsFontSpec values.
  */
-export const swiftFontDefaults = {
+export const swiftFontDefaults: Format = {
   name: 'swift/wldFontDefaults',
-  format: ({ dictionary }) => {
+  format: ({ dictionary }: FormatFnArguments) => {
     const tokens = dictionary.allTokens.filter(
       (t) => t.$type === 'typography',
     );
 
     const lines = tokens.map((token) => {
       const name = token.path[token.path.length - 1];
-      const v = token.$value || token.value;
+      const v = (token.$value || token.value) as TypographyTokenValue;
       return `    public static let ${name} = WdsFontSpec(size: ${v.fontSize}, weight: ${v.fontWeight}, letterSpacing: ${v.letterSpacing}, lineHeight: ${v.lineHeightMultiplier})`;
     });
 
@@ -113,16 +112,16 @@ export const swiftFontDefaults = {
 /**
  * swift/spacing – Spacing enum with CGFloat constants.
  */
-export const swiftSpacing = {
+export const swiftSpacing: Format = {
   name: 'swift/spacing',
-  format: ({ dictionary }) => {
+  format: ({ dictionary }: FormatFnArguments) => {
     const tokens = dictionary.allTokens.filter(
       (t) => t.$type === 'dimension' && t.path[0] === 'spacing',
     );
 
     const lines = tokens.map((token) => {
       const name = token.path[token.path.length - 1];
-      const v = token.$value ?? token.value;
+      const v = (token.$value ?? token.value) as number;
       return `    public static let ${name}: CGFloat = ${v}`;
     });
 

@@ -1,27 +1,28 @@
 import StyleDictionary from 'style-dictionary';
-import { readFileSync, cpSync, mkdirSync, existsSync } from 'fs';
+import { cpSync, mkdirSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import type { Format, TransformedToken } from 'style-dictionary/types';
 
 import {
   composeColorObject,
   composeThemeColors,
   composeTypography,
   composeSpacing,
-} from './formats/compose.mjs';
+} from './formats/compose.js';
 import {
   swiftColorDefaults,
   swiftColorTheme,
   swiftFontDefaults,
   swiftSpacing,
-} from './formats/swift.mjs';
+} from './formats/swift.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // ---------------------------------------------------------------------------
 // Register all custom formats
 // ---------------------------------------------------------------------------
-const allFormats = [
+const allFormats: Format[] = [
   composeColorObject,
   composeThemeColors,
   composeTypography,
@@ -35,7 +36,7 @@ const allFormats = [
 // ---------------------------------------------------------------------------
 // Token source paths (primitives + components – shared across themes)
 // ---------------------------------------------------------------------------
-const primitiveSources = [
+const primitiveSources: string[] = [
   'tokens/color/base.json',
   'tokens/color/specialty.json',
   'tokens/color/crypto.json',
@@ -54,7 +55,7 @@ const iosOut = 'build/ios/Sources/WorldDesignSystem';
 // ---------------------------------------------------------------------------
 // Helper: build one theme pass
 // ---------------------------------------------------------------------------
-async function buildTheme(theme) {
+async function buildTheme(theme: 'light' | 'dark'): Promise<void> {
   const semanticFile =
     theme === 'light' ? 'tokens/semantic/light.json' : 'tokens/semantic/dark.json';
   const themeLabel = theme.charAt(0).toUpperCase() + theme.slice(1);
@@ -62,7 +63,7 @@ async function buildTheme(theme) {
   const sd = new StyleDictionary({
     source: [...primitiveSources, semanticFile],
     platforms: {
-      // ── Android / Compose ──────────────────────────────
+      // -- Android / Compose --
       'android-primitives': {
         buildPath: `${androidOut}/`,
         files:
@@ -72,18 +73,18 @@ async function buildTheme(theme) {
                   destination: 'WdsColorPalette.kt',
                   format: 'compose/colorObject',
                   options: { objectName: 'WdsColorPalette' },
-                  filter: (token) =>
+                  filter: (token: TransformedToken) =>
                     token.$type === 'color' && token.path[0] === 'color',
                 },
                 {
                   destination: 'WdsTypography.kt',
                   format: 'compose/typography',
-                  filter: (token) => token.$type === 'typography',
+                  filter: (token: TransformedToken) => token.$type === 'typography',
                 },
                 {
                   destination: 'WdsSpacing.kt',
                   format: 'compose/spacing',
-                  filter: (token) =>
+                  filter: (token: TransformedToken) =>
                     token.$type === 'dimension' &&
                     token.path[0] === 'spacing',
                 },
@@ -97,13 +98,13 @@ async function buildTheme(theme) {
             destination: `Wds${themeLabel}ColorTokens.kt`,
             format: 'compose/themeColors',
             options: { objectName: `Wds${themeLabel}ColorTokens` },
-            filter: (token) =>
+            filter: (token: TransformedToken) =>
               token.$type === 'color' && token.path[0] === 'semantic',
           },
         ],
       },
 
-      // ── iOS / Swift ────────────────────────────────────
+      // -- iOS / Swift --
       'ios-primitives': {
         buildPath: `${iosOut}/`,
         files:
@@ -112,18 +113,18 @@ async function buildTheme(theme) {
                 {
                   destination: 'WdsColorPalette.swift',
                   format: 'swift/wldColorDefaults',
-                  filter: (token) =>
+                  filter: (token: TransformedToken) =>
                     token.$type === 'color' && token.path[0] === 'color',
                 },
                 {
                   destination: 'WdsTypography.swift',
                   format: 'swift/wldFontDefaults',
-                  filter: (token) => token.$type === 'typography',
+                  filter: (token: TransformedToken) => token.$type === 'typography',
                 },
                 {
                   destination: 'WdsSpacing.swift',
                   format: 'swift/spacing',
-                  filter: (token) =>
+                  filter: (token: TransformedToken) =>
                     token.$type === 'dimension' &&
                     token.path[0] === 'spacing',
                 },
@@ -137,7 +138,7 @@ async function buildTheme(theme) {
             destination: `Wds${themeLabel}ColorTokens.swift`,
             format: 'swift/wldColorTheme',
             options: { structName: `Wds${themeLabel}ColorTokens` },
-            filter: (token) =>
+            filter: (token: TransformedToken) =>
               token.$type === 'color' && token.path[0] === 'semantic',
           },
         ],
@@ -151,14 +152,19 @@ async function buildTheme(theme) {
   }
 
   await sd.buildAllPlatforms();
-  console.log(`✓ ${themeLabel} theme built`);
+  console.log(`\u2713 ${themeLabel} theme built`);
 }
 
 // ---------------------------------------------------------------------------
 // Copy static template files into build/
 // ---------------------------------------------------------------------------
-function copyTemplates() {
-  const copies = [
+interface TemplateCopy {
+  from: string;
+  to: string;
+}
+
+function copyTemplates(): void {
+  const copies: TemplateCopy[] = [
     // Android
     {
       from: 'templates/android/build.gradle.kts',
@@ -187,20 +193,20 @@ function copyTemplates() {
     const src = resolve(__dirname, from);
     const dest = resolve(__dirname, to);
     if (!existsSync(src)) {
-      console.warn(`  ⚠ template not found: ${from}`);
+      console.warn(`  \u26A0 template not found: ${from}`);
       continue;
     }
     mkdirSync(dirname(dest), { recursive: true });
     cpSync(src, dest);
   }
-  console.log('✓ Templates copied');
+  console.log('\u2713 Templates copied');
 }
 
 // ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
-async function main() {
-  console.log('Building World Design System tokens…\n');
+async function main(): Promise<void> {
+  console.log('Building World Design System tokens\u2026\n');
   await buildTheme('light');
   await buildTheme('dark');
   copyTemplates();

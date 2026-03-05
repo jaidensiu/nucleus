@@ -2,47 +2,46 @@
  * Custom Style Dictionary formats for Kotlin / Jetpack Compose output.
  */
 
+import type { Format, FormatFnArguments } from 'style-dictionary/types';
+import type { TypographyTokenValue, FontWeightKey } from './types.js';
+
 const PACKAGE = 'com.worldcoin.designsystem';
 
-function hexToArgb(hex) {
+function hexToArgb(hex: string): string {
   const h = hex.replace('#', '');
   return `0xFF${h.toUpperCase()}`;
 }
 
-function camelCase(path) {
+function camelCase(path: string[]): string {
   return path
     .map((p, i) => (i === 0 ? p : p.charAt(0).toUpperCase() + p.slice(1)))
     .join('');
 }
 
-function pascalCase(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-function fontWeightToCompose(weight) {
-  const map = {
+function fontWeightToCompose(weight: number): string {
+  const map: Record<FontWeightKey, string> = {
     325: 'FontWeight.Light',
     400: 'FontWeight.Normal',
     500: 'FontWeight.Medium',
     600: 'FontWeight.SemiBold',
     700: 'FontWeight.Bold',
   };
-  return map[weight] || `FontWeight(${weight})`;
+  return map[weight as FontWeightKey] || `FontWeight(${weight})`;
 }
 
 /**
  * compose/colorObject – Generates a Kotlin object with Color(...) constants.
  * Used for primitive palette colors, crypto colors, specialty colors, avatar colors.
  */
-export const composeColorObject = {
+export const composeColorObject: Format = {
   name: 'compose/colorObject',
-  format: ({ dictionary, options }) => {
-    const objectName = options.objectName || 'WdsColorPalette';
+  format: ({ dictionary, options }: FormatFnArguments) => {
+    const objectName = (options.objectName as string) || 'WdsColorPalette';
     const tokens = dictionary.allTokens.filter((t) => t.$type === 'color');
 
     const lines = tokens.map((token) => {
       const name = camelCase(token.path);
-      const hex = token.$value || token.value;
+      const hex = (token.$value || token.value) as string;
       return `    val ${name} = Color(${hexToArgb(hex)})`;
     });
 
@@ -63,17 +62,17 @@ export const composeColorObject = {
  * compose/themeColors – Generates a Kotlin object for semantic theme colors
  * (light or dark). References resolved hex values directly.
  */
-export const composeThemeColors = {
+export const composeThemeColors: Format = {
   name: 'compose/themeColors',
-  format: ({ dictionary, options }) => {
-    const objectName = options.objectName || 'LightColorTokens';
+  format: ({ dictionary, options }: FormatFnArguments) => {
+    const objectName = (options.objectName as string) || 'LightColorTokens';
     const tokens = dictionary.allTokens.filter(
       (t) => t.$type === 'color' && t.path[0] === 'semantic',
     );
 
     const lines = tokens.map((token) => {
       const name = camelCase(token.path.slice(1)); // drop "semantic" prefix
-      const hex = token.$value || token.value;
+      const hex = (token.$value || token.value) as string;
       return `    val ${name} = Color(${hexToArgb(hex)})`;
     });
 
@@ -93,16 +92,16 @@ export const composeThemeColors = {
 /**
  * compose/typography – Generates a Kotlin object with TextStyle constants.
  */
-export const composeTypography = {
+export const composeTypography: Format = {
   name: 'compose/typography',
-  format: ({ dictionary }) => {
+  format: ({ dictionary }: FormatFnArguments) => {
     const tokens = dictionary.allTokens.filter(
       (t) => t.$type === 'typography',
     );
 
     const lines = tokens.flatMap((token) => {
       const name = token.path[token.path.length - 1];
-      const v = token.$value || token.value;
+      const v = (token.$value || token.value) as TypographyTokenValue;
       const fontSize = v.fontSize;
       const lineHeight = (v.fontSize * v.lineHeightMultiplier).toFixed(1);
       const letterSpacing =
@@ -143,16 +142,16 @@ export const composeTypography = {
 /**
  * compose/spacing – Generates a Kotlin object with Dp constants.
  */
-export const composeSpacing = {
+export const composeSpacing: Format = {
   name: 'compose/spacing',
-  format: ({ dictionary }) => {
+  format: ({ dictionary }: FormatFnArguments) => {
     const tokens = dictionary.allTokens.filter(
       (t) => t.$type === 'dimension' && t.path[0] === 'spacing',
     );
 
     const lines = tokens.map((token) => {
       const name = token.path[token.path.length - 1];
-      const v = token.$value ?? token.value;
+      const v = (token.$value ?? token.value) as number;
       return `    val ${name} = ${v}.dp`;
     });
 

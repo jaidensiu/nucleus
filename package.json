@@ -5,10 +5,16 @@
   "description": "World Design System – cross-platform design tokens",
   "type": "module",
   "scripts": {
-    "build": "node config.mjs",
+    "build": "tsx config.ts",
+    "typecheck": "tsc --noEmit",
     "clean": "rm -rf build"
   },
   "dependencies": {
     "style-dictionary": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }
