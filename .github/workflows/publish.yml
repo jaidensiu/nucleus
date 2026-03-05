@@ -75,7 +75,7 @@ jobs:
         env:
           BUMP: ${{ steps.pr.outputs.bump }}
         run: |
-          LATEST=$(git tag -l 'v*' --sort=-v:refname | head -1)
+          LATEST=$(git tag -l 'v*' --sort=-v:refname | grep -v '-' | head -1)
           if [ -z "$LATEST" ]; then LATEST="v0.0.0"; fi
 
           MAJOR=$(echo "$LATEST" | cut -d. -f1 | tr -d v)
