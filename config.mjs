@@ -76,26 +76,26 @@ async function buildTheme(theme) {
           theme === 'light'
             ? [
                 {
-                  destination: 'WDSColorPalette.kt',
+                  destination: 'WdsColorPalette.kt',
                   format: 'compose/colorObject',
-                  options: { objectName: 'WDSColorPalette' },
+                  options: { objectName: 'WdsColorPalette' },
                   filter: (token) =>
                     token.$type === 'color' && token.path[0] === 'color',
                 },
                 {
-                  destination: 'WDSTypography.kt',
+                  destination: 'WdsTypography.kt',
                   format: 'compose/typography',
                   filter: (token) => token.$type === 'typography',
                 },
                 {
-                  destination: 'WDSSpacing.kt',
+                  destination: 'WdsSpacing.kt',
                   format: 'compose/spacing',
                   filter: (token) =>
                     token.$type === 'dimension' &&
                     token.path[0] === 'spacing',
                 },
                 {
-                  destination: 'WDSComponents.kt',
+                  destination: 'WdsComponents.kt',
                   format: 'compose/components',
                   filter: (token) => token.path[0] === 'component',
                 },
@@ -106,9 +106,9 @@ async function buildTheme(theme) {
         buildPath: `${androidOut}/`,
         files: [
           {
-            destination: `${themeLabel}ColorTokens.kt`,
+            destination: `Wds${themeLabel}ColorTokens.kt`,
             format: 'compose/themeColors',
-            options: { objectName: `${themeLabel}ColorTokens` },
+            options: { objectName: `Wds${themeLabel}ColorTokens` },
             filter: (token) =>
               token.$type === 'color' && token.path[0] === 'semantic',
           },
@@ -122,25 +122,25 @@ async function buildTheme(theme) {
           theme === 'light'
             ? [
                 {
-                  destination: 'ColorPalette.swift',
+                  destination: 'WdsColorPalette.swift',
                   format: 'swift/wldColorDefaults',
                   filter: (token) =>
                     token.$type === 'color' && token.path[0] === 'color',
                 },
                 {
-                  destination: 'TypographyTokens.swift',
+                  destination: 'WdsTypography.swift',
                   format: 'swift/wldFontDefaults',
                   filter: (token) => token.$type === 'typography',
                 },
                 {
-                  destination: 'SpacingTokens.swift',
+                  destination: 'WdsSpacing.swift',
                   format: 'swift/spacing',
                   filter: (token) =>
                     token.$type === 'dimension' &&
                     token.path[0] === 'spacing',
                 },
                 {
-                  destination: 'ComponentTokens.swift',
+                  destination: 'WdsComponents.swift',
                   format: 'swift/components',
                   filter: (token) => token.path[0] === 'component',
                 },
@@ -151,9 +151,9 @@ async function buildTheme(theme) {
         buildPath: `${iosOut}/`,
         files: [
           {
-            destination: `${themeLabel}Theme.swift`,
+            destination: `Wds${themeLabel}ColorTokens.swift`,
             format: 'swift/wldColorTheme',
-            options: { structName: `${themeLabel}Theme` },
+            options: { structName: `Wds${themeLabel}ColorTokens` },
             filter: (token) =>
               token.$type === 'color' && token.path[0] === 'semantic',
           },
@@ -186,8 +186,8 @@ function copyTemplates() {
       to: 'build/android/settings.gradle.kts',
     },
     {
-      from: 'templates/android/src/main/kotlin/com/worldcoin/designsystem/WDSTheme.kt',
-      to: `${androidOut}/WDSTheme.kt`,
+      from: 'templates/android/src/main/kotlin/com/worldcoin/designsystem/WdsTheme.kt',
+      to: `${androidOut}/WdsTheme.kt`,
     },
     // iOS
     {
@@ -195,8 +195,8 @@ function copyTemplates() {
       to: 'build/ios/Package.swift',
     },
     {
-      from: 'templates/ios/Sources/WorldDesignSystem/WDSTheme.swift',
-      to: `${iosOut}/WDSTheme.swift`,
+      from: 'templates/ios/Sources/WorldDesignSystem/WdsTheme.swift',
+      to: `${iosOut}/WdsTheme.swift`,
     },
   ];
 

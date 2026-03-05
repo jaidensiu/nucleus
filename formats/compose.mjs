@@ -37,7 +37,7 @@ function fontWeightToCompose(weight) {
 export const composeColorObject = {
   name: 'compose/colorObject',
   format: ({ dictionary, options }) => {
-    const objectName = options.objectName || 'WDSColorPalette';
+    const objectName = options.objectName || 'WdsColorPalette';
     const tokens = dictionary.allTokens.filter((t) => t.$type === 'color');
 
     const lines = tokens.map((token) => {
@@ -132,7 +132,7 @@ export const composeTypography = {
       '// Font family must be provided by the consuming app',
       'val WorldProFontFamily = FontFamily.Default',
       '',
-      'object WDSTypography {',
+      'object WdsTypography {',
       ...lines,
       '}',
       '',
@@ -162,7 +162,7 @@ export const composeSpacing = {
       'import androidx.compose.ui.unit.dp',
       'import androidx.compose.ui.unit.Dp',
       '',
-      'object WDSSpacing {',
+      'object WdsSpacing {',
       ...lines,
       '}',
       '',
@@ -218,7 +218,7 @@ export const composeComponents = {
         const name = t.path[2];
         const v = t.$value ?? t.value;
         sections.push(
-          `    val shadow${pascalCase(name)} = WDSShadow(`,
+          `    val shadow${pascalCase(name)} = WdsShadow(`,
           `        color = 0xFF${v.color.replace('#', '').toUpperCase()},`,
           `        alpha = ${v.alpha}f,`,
           `        offsetX = ${v.offsetX}.dp,`,
@@ -236,7 +236,7 @@ export const composeComponents = {
       'import androidx.compose.ui.unit.dp',
       'import androidx.compose.ui.unit.Dp',
       '',
-      'data class WDSShadow(',
+      'data class WdsShadow(',
       '    val color: Long,',
       '    val alpha: Float,',
       '    val offsetX: Dp,',
@@ -245,7 +245,7 @@ export const composeComponents = {
       '    val cornerRadius: Dp,',
       ')',
       '',
-      'object WDSComponents {',
+      'object WdsComponents {',
       ...sections,
       '}',
       '',
