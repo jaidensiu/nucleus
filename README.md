@@ -29,10 +29,10 @@ Generated files appear in `build/`:
 
 | File | Description |
 |------|-------------|
-| `tokens/color/base.json` | Grey, error, warning, success, info palettes |
-| `tokens/color/specialty.json` | Brand colors (worldBlue, carrotOrange, purple, etc.) |
-| `tokens/semantic/light.json` | Semantic-to-primitive mappings for light theme |
-| `tokens/semantic/dark.json` | Semantic-to-primitive mappings for dark theme |
+| `tokens/color/primitive/base.json` | Grey, error, warning, success, info palettes |
+| `tokens/color/primitive/specialty.json` | Brand colors (worldBlue, carrotOrange, purple, etc.) |
+| `tokens/color/semantic/light.json` | Semantic-to-primitive mappings for light theme |
+| `tokens/color/semantic/dark.json` | Semantic-to-primitive mappings for dark theme |
 | `tokens/typography/scale.json` | Full type scale (d1, n1-5, h1-4, s1-4, l1-3, b1-4) |
 | `tokens/spacing/spacing.json` | Spacing scale (xxs through xxl) |
 

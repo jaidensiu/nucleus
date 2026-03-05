@@ -37,8 +37,8 @@ const allFormats: Format[] = [
 // Token source paths (primitives – shared across themes)
 // ---------------------------------------------------------------------------
 const primitiveSources: string[] = [
-  'tokens/color/base.json',
-  'tokens/color/specialty.json',
+  'tokens/color/primitive/base.json',
+  'tokens/color/primitive/specialty.json',
   'tokens/typography/scale.json',
   'tokens/spacing/spacing.json',
 ];
@@ -55,13 +55,12 @@ const iosOut = 'build/ios/Sources/WorldDesignSystem';
 // ---------------------------------------------------------------------------
 async function buildTheme(theme: 'light' | 'dark'): Promise<void> {
   const semanticFile =
-    theme === 'light' ? 'tokens/semantic/light.json' : 'tokens/semantic/dark.json';
+    theme === 'light' ? 'tokens/color/semantic/light.json' : 'tokens/color/semantic/dark.json';
   const themeLabel = theme.charAt(0).toUpperCase() + theme.slice(1);
 
   const sd = new StyleDictionary({
     source: [...primitiveSources, semanticFile],
     platforms: {
-      // -- Android / Compose --
       'android-primitives': {
         buildPath: `${androidOut}/`,
         files:
@@ -101,8 +100,6 @@ async function buildTheme(theme: 'light' | 'dark'): Promise<void> {
           },
         ],
       },
-
-      // -- iOS / Swift --
       'ios-primitives': {
         buildPath: `${iosOut}/`,
         files:
@@ -163,7 +160,6 @@ interface TemplateCopy {
 
 function copyTemplates(): void {
   const copies: TemplateCopy[] = [
-    // Android
     {
       from: 'templates/android/build.gradle.kts',
       to: 'build/android/build.gradle.kts',
@@ -176,7 +172,6 @@ function copyTemplates(): void {
       from: 'templates/android/src/main/kotlin/com/worldcoin/designsystem/WdsTheme.kt',
       to: `${androidOut}/WdsTheme.kt`,
     },
-    // iOS
     {
       from: 'templates/ios/Package.swift',
       to: 'build/ios/Package.swift',
