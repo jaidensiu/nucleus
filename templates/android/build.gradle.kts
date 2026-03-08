@@ -4,7 +4,7 @@ plugins {
     `maven-publish`
 }
 
-group = "com.jaiden"
+group = "com.jaidensiu"
 version = System.getenv("VERSION") ?: "0.0.1-SNAPSHOT"
 
 val artifactId = "world-design-system"

@@ -97,7 +97,7 @@ maven {
 Then add the dependency:
 
 ```groovy
-implementation "com.jaiden:world-design-system:<version>"
+implementation "com.jaidensiu:world-design-system:<version>"
 ```
 
 Wrap your composable tree in `WdsTheme { ... }` and access tokens via `Wds.colors`, `WdsTypography`, `WdsSpacing`, etc.
