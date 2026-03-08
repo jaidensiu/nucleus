@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.10
+- [Full changelog](https://github.com/jaidensiu/world-design-system/compare/v0.1.9...v0.1.10)
+
+
 ## v0.1.9
 - [Full changelog](https://github.com/jaidensiu/world-design-system/compare/v0.1.8...v0.1.9)
 
