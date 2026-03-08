@@ -16,6 +16,13 @@ import {
   swiftFontDefaults,
   swiftSpacing,
 } from './formats/swift.js';
+import {
+  cssColorVariables,
+  cssThemeVariables,
+  cssTypography,
+  cssSpacing,
+  jsonFlat,
+} from './formats/css.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -31,6 +38,11 @@ const allFormats: Format[] = [
   swiftColorTheme,
   swiftFontDefaults,
   swiftSpacing,
+  cssColorVariables,
+  cssThemeVariables,
+  cssTypography,
+  cssSpacing,
+  jsonFlat,
 ];
 
 // ---------------------------------------------------------------------------
@@ -49,6 +61,7 @@ const primitiveSources: string[] = [
 const androidOut =
   'build/android/src/main/kotlin/com/worldcoin/designsystem';
 const iosOut = 'build/ios/Sources/WorldDesignSystem';
+const webOut = 'build/web';
 
 // ---------------------------------------------------------------------------
 // Helper: build one theme pass
@@ -138,6 +151,72 @@ async function buildTheme(theme: 'light' | 'dark'): Promise<void> {
           },
         ],
       },
+      'web-primitives': {
+        buildPath: `${webOut}/`,
+        files:
+          theme === 'light'
+            ? [
+                {
+                  destination: 'wds-color-palette.css',
+                  format: 'css/colorVariables',
+                  filter: (token: TransformedToken) =>
+                    token.$type === 'color' && token.path[0] === 'color',
+                },
+                {
+                  destination: 'wds-typography.css',
+                  format: 'css/typography',
+                  filter: (token: TransformedToken) => token.$type === 'typography',
+                },
+                {
+                  destination: 'wds-spacing.css',
+                  format: 'css/spacing',
+                  filter: (token: TransformedToken) =>
+                    token.$type === 'dimension' &&
+                    token.path[0] === 'spacing',
+                },
+                {
+                  destination: 'tokens.json',
+                  format: 'json/flat',
+                  filter: (token: TransformedToken) =>
+                    token.$type === 'color' && token.path[0] === 'color',
+                },
+                {
+                  destination: 'typography.json',
+                  format: 'json/flat',
+                  filter: (token: TransformedToken) => token.$type === 'typography',
+                },
+                {
+                  destination: 'spacing.json',
+                  format: 'json/flat',
+                  filter: (token: TransformedToken) =>
+                    token.$type === 'dimension' &&
+                    token.path[0] === 'spacing',
+                },
+              ]
+            : [],
+      },
+      'web-semantic': {
+        buildPath: `${webOut}/`,
+        files: [
+          {
+            destination: `wds-${theme}-theme.css`,
+            format: 'css/themeVariables',
+            options: {
+              selector: theme === 'light'
+                ? ':root, [data-theme="light"]'
+                : '[data-theme="dark"]',
+            },
+            filter: (token: TransformedToken) =>
+              token.$type === 'color' && token.path[0] === 'semantic',
+          },
+          {
+            destination: `${theme}-theme.json`,
+            format: 'json/flat',
+            filter: (token: TransformedToken) =>
+              token.$type === 'color' && token.path[0] === 'semantic',
+          },
+        ],
+      },
     },
   });
 
@@ -179,6 +258,14 @@ function copyTemplates(): void {
     {
       from: 'templates/ios/Sources/WorldDesignSystem/WdsTheme.swift',
       to: `${iosOut}/WdsTheme.swift`,
+    },
+    {
+      from: 'templates/web/package.json',
+      to: 'build/web/package.json',
+    },
+    {
+      from: 'templates/web/index.d.ts',
+      to: 'build/web/index.d.ts',
     },
   ];
 

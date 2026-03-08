@@ -129,6 +129,11 @@ jobs:
           name: ios-tokens
           path: build/ios/
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web-tokens
+          path: build/web/
+
   publish-maven:
     needs: [release, build]
     runs-on: ubuntu-latest
@@ -199,8 +204,32 @@ jobs:
           git tag "${TAG}-ios"
           git push origin generated/ios --tags
 
+  publish-npm:
+    needs: [release, build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: web-tokens
+          path: web-build/
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://npm.pkg.github.com
+          scope: '@worldcoin'
+
+      - name: Set version and publish
+        working-directory: web-build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ needs.release.outputs.version }}
+        run: |
+          npm version "${VERSION#v}" --no-git-tag-version
+          npm publish
+
   post-release:
-    needs: [release, publish-maven, publish-spm]
+    needs: [release, publish-maven, publish-spm, publish-npm]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

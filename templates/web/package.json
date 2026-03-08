@@ -1,0 +1,19 @@
+{
+  "name": "@worldcoin/design-system",
+  "description": "World Design System tokens for Web — CSS custom properties and JSON",
+  "license": "UNLICENSED",
+  "main": "tokens.json",
+  "types": "index.d.ts",
+  "files": [
+    "*.css",
+    "*.json",
+    "index.d.ts"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jaidensiu/world-design-system.git"
+  }
+}
