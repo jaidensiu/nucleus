@@ -228,6 +228,14 @@ jobs:
           npm version "${VERSION#v}" --no-git-tag-version
           npm publish
 
+  deploy-website:
+    needs: [release, publish-maven, publish-spm, publish-npm]
+    if: needs.release.outputs.tagged == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel deploy
+        run: curl -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}"
+
   post-release:
     needs: [release, publish-maven, publish-spm, publish-npm]
     runs-on: ubuntu-latest
