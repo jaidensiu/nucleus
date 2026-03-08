@@ -4,10 +4,10 @@ plugins {
     `maven-publish`
 }
 
-group = "com.worldcoin"
+group = "com.jaiden"
 version = System.getenv("VERSION") ?: "0.0.1-SNAPSHOT"
 
-val artifactId = "design-system"
+val artifactId = "world-design-system"
 
 repositories {
     mavenCentral()

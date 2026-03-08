@@ -1,5 +1,5 @@
 {
-  "name": "@jaidensiu/design-system",
+  "name": "@jaidensiu/world-design-system",
   "description": "World Design System tokens for Web — CSS custom properties and JSON",
   "license": "UNLICENSED",
   "main": "tokens.json",
