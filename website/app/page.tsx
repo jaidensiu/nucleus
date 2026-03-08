@@ -9,6 +9,10 @@ import {
   spacingTokens,
   fontWeightLabels,
 } from "./tokens";
+import pkg from "@jaidensiu/world-design-system/package.json";
+
+const TOKENS_VERSION = pkg.version;
+const GITHUB_URL = "https://github.com/jaidensiu/world-design-system";
 
 type Tab = "colors" | "semantic" | "typography" | "spacing";
 type Theme = "light" | "dark";
@@ -397,7 +401,17 @@ export default function Home() {
             <h1 className="text-lg font-semibold tracking-tight">
               World Design System
             </h1>
-            <p className="text-xs text-muted">Design tokens reference</p>
+            <p className="text-xs text-muted">
+              Design tokens reference &middot; v{TOKENS_VERSION} &middot;{" "}
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-foreground transition-colors"
+              >
+                GitHub
+              </a>
+            </p>
           </div>
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1 rounded-lg bg-surface p-1">
@@ -428,6 +442,16 @@ export default function Home() {
       <footer className="border-t border-border mt-16">
         <div className="mx-auto max-w-5xl px-6 py-6 text-xs text-muted text-center">
           World Design System &mdash; Tokens for Android, iOS, and Web
+          <br />
+          v{TOKENS_VERSION} &middot;{" "}
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-foreground transition-colors"
+          >
+            GitHub
+          </a>
         </div>
       </footer>
     </div>
