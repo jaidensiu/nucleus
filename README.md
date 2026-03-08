@@ -1,6 +1,6 @@
 # World Design System
 
-Cross-platform design tokens that define the foundational UI layer of World App.
+Cross-platform design tokens that define the foundational UI layer and visual identity of the World ecosystem.
 
 ## Architecture
 
@@ -9,7 +9,7 @@ Cross-platform design tokens that define the foundational UI layer of World App.
 1. **Primitive tokens** – Raw palette values (grey, error, warning, success, info, specialty). Theme-agnostic.
 2. **Semantic tokens** – Role-based references (`background.primary`, `text.primary`, `action.primary`). Resolve differently per light/dark theme.
 
-**Platform outputs are standalone** – no dependency on app-specific types. Android gets Compose `Color` objects; iOS gets raw hex `String` constants and a `WdsFontSpec` struct. The consuming app bridges these to its own types (e.g. `WLDColor`, `WLDFont`).
+**Platform outputs are standalone** – no dependency on app-specific types. Android gets Compose `Color` objects; iOS gets raw hex `String` constants and a `WdsFontSpec` struct; Web gets CSS custom properties and JSON files. The consuming app bridges these to its own types (e.g. `WLDColor`, `WLDFont`).
 
 ## Quick Start
 
@@ -24,6 +24,7 @@ Generated files appear in `build/`:
 |----------|------|----------|
 | Android  | `build/android/` | Kotlin objects with Compose `Color` values, `build.gradle.kts` for Maven publishing |
 | iOS      | `build/ios/` | Standalone Swift enums/structs with hex string constants, `Package.swift` for SPM |
+| Web      | `build/web/` | CSS custom properties, JSON token files, `package.json` for npm publishing |
 
 ## Token Files
 
@@ -54,6 +55,14 @@ Generated files appear in `build/`:
 - `WdsSpacing` – Spacing scale as `CGFloat` values
 - `WdsTheme` – Light/dark `WdsSemanticColors` bundles
 
+### Web (CSS / JSON)
+
+- `wds-color-palette.css` – Primitive colors as CSS custom properties (`--wds-color-*`)
+- `wds-light-theme.css` / `wds-dark-theme.css` – Semantic theme colors as CSS custom properties (`--wds-*`)
+- `wds-typography.css` – Typography as CSS custom properties (`--wds-typography-*`)
+- `wds-spacing.css` – Spacing as CSS custom properties (`--wds-spacing-*`)
+- `tokens.json` / `light-theme.json` / `dark-theme.json` / `typography.json` / `spacing.json` – JSON token files for programmatic use
+
 ## CI/CD
 
 The GitHub Actions workflow (`.github/workflows/publish.yml`) supports two trigger modes:
@@ -64,9 +73,10 @@ The GitHub Actions workflow (`.github/workflows/publish.yml`) supports two trigg
 ### Pipeline Steps
 
 1. **release** – Determines version bump, creates and pushes a `v*` tag
-2. **build** – Runs `npm run build`, uploads `android-tokens` and `ios-tokens` artifacts
+2. **build** – Runs `npm run build`, uploads `android-tokens`, `ios-tokens`, and `web-tokens` artifacts
 3. **publish-maven** – Publishes Android library to GitHub Packages
 4. **publish-spm** – Commits generated iOS files to the `generated/ios` branch, tags as `v*-ios`
+5. **publish-npm** – Publishes Web package to GitHub Packages npm registry
 
 ## Consuming the Tokens
 
@@ -87,7 +97,7 @@ maven {
 Then add the dependency:
 
 ```groovy
-implementation "com.worldcoin:design-system:<version>"
+implementation "com.jaiden:world-design-system:<version>"
 ```
 
 Wrap your composable tree in `WdsTheme { ... }` and access tokens via `Wds.colors`, `WdsTypography`, `WdsSpacing`, etc.
@@ -129,9 +139,54 @@ let font = WLDFont(size: spec.size, weight: Weight(integerLiteral: Int(spec.weig
 let lightBg = WdsTheme.light.backgroundPrimary  // hex String
 ```
 
+### Web
+
+Add a `.npmrc` to your project:
+
+```
+@jaidensiu:registry=https://npm.pkg.github.com
+```
+
+Then install the package:
+
+```bash
+npm install @jaidensiu/world-design-system
+```
+
+**CSS custom properties** – import the stylesheets you need:
+
+```css
+@import "@jaidensiu/world-design-system/wds-color-palette.css";
+@import "@jaidensiu/world-design-system/wds-light-theme.css";
+@import "@jaidensiu/world-design-system/wds-dark-theme.css";
+@import "@jaidensiu/world-design-system/wds-typography.css";
+@import "@jaidensiu/world-design-system/wds-spacing.css";
+```
+
+Then use the variables:
+
+```css
+.card {
+  background: var(--wds-background-primary);
+  color: var(--wds-text-primary);
+  padding: var(--wds-spacing-md);
+  border: 1px solid var(--wds-border-default);
+}
+```
+
+**JSON tokens** – import directly for JS/TS usage:
+
+```ts
+import tokens from "@jaidensiu/world-design-system/tokens.json";
+import lightTheme from "@jaidensiu/world-design-system/light-theme.json";
+import darkTheme from "@jaidensiu/world-design-system/dark-theme.json";
+import typography from "@jaidensiu/world-design-system/typography.json";
+import spacing from "@jaidensiu/world-design-system/spacing.json";
+```
+
 ## Adding / Modifying Tokens
 
 1. Edit the relevant JSON file in `tokens/`
 2. Run `npm run build` to verify output
 3. Open a PR with a release label (`patch`, `minor`, or `major`)
-4. On merge, CI auto-tags and publishes to both platforms
+4. On merge, CI auto-tags and publishes to all three platforms
