@@ -1,8 +1,8 @@
-import primitiveTokens from "@jaidensiu/world-design-system/tokens.json";
-import lightThemeTokens from "@jaidensiu/world-design-system/light-theme.json";
-import darkThemeTokens from "@jaidensiu/world-design-system/dark-theme.json";
-import typographyTokens_ from "@jaidensiu/world-design-system/typography.json";
-import spacingTokens_ from "@jaidensiu/world-design-system/spacing.json";
+import primitiveTokens from "@jaidensiu/nucleus/tokens.json";
+import lightThemeTokens from "@jaidensiu/nucleus/light-theme.json";
+import darkThemeTokens from "@jaidensiu/nucleus/dark-theme.json";
+import typographyTokens_ from "@jaidensiu/nucleus/typography.json";
+import spacingTokens_ from "@jaidensiu/nucleus/spacing.json";
 
 // ---------------------------------------------------------------------------
 // Types

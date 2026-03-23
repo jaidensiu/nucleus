@@ -249,7 +249,7 @@ jobs:
           npm version "${VERSION#v}" --no-git-tag-version
 
           # Insert new version entry after the "# Changelog" title
-          LINK="https://github.com/jaidensiu/world-design-system/compare/${PREVIOUS_VERSION}...${VERSION}"
+          LINK="https://github.com/jaidensiu/nucleus/compare/${PREVIOUS_VERSION}...${VERSION}"
           sed -i "/^# Changelog/a\\\n## ${VERSION}\n- [Full changelog](${LINK})\n" CHANGELOG.md
 
           git config user.name "github-actions[bot]"

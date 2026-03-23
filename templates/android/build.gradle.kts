@@ -7,7 +7,7 @@ plugins {
 group = "com.jaidensiu"
 version = System.getenv("VERSION") ?: "0.0.1-SNAPSHOT"
 
-val artifactId = "world-design-system"
+val artifactId = "nucleus"
 
 repositories {
     mavenCentral()
@@ -43,7 +43,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/jaidensiu/world-design-system")
+            url = uri("https://maven.pkg.github.com/jaidensiu/nucleus")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")

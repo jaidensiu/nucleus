@@ -1,8 +1,8 @@
-# World Design System Website
+# Nucleus Website
 
-Token reference website for the World Design System. Displays all design tokens (colors, typography, spacing) with light/dark theme support.
+Token reference website for Nucleus. Displays all design tokens (colors, typography, spacing) with light/dark theme support.
 
-Live at [world-design-system.vercel.app](https://world-design-system.vercel.app).
+Live at [nucleus.vercel.app](https://nucleus.vercel.app).
 
 ## Setup
 
@@ -10,7 +10,7 @@ Live at [world-design-system.vercel.app](https://world-design-system.vercel.app)
 npm install
 ```
 
-The website depends on `@jaidensiu/world-design-system` from GitHub Packages. A `.npmrc` is included to configure the registry. You need a `GITHUB_TOKEN` environment variable with `read:packages` scope.
+The website depends on `@jaidensiu/nucleus` from GitHub Packages. A `.npmrc` is included to configure the registry. You need a `GITHUB_TOKEN` environment variable with `read:packages` scope.
 
 ## Development
 
@@ -35,4 +35,4 @@ Deployed to Vercel with analytics enabled. Pushes to `main` automatically redepl
 - [Next.js](https://nextjs.org) (App Router)
 - [Tailwind CSS](https://tailwindcss.com)
 - [Vercel Analytics](https://vercel.com/analytics)
-- [`@jaidensiu/world-design-system`](https://github.com/jaidensiu/world-design-system) for token data
+- [`@jaidensiu/nucleus`](https://github.com/jaidensiu/nucleus) for token data

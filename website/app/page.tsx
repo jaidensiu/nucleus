@@ -9,10 +9,10 @@ import {
   spacingTokens,
   fontWeightLabels,
 } from "./tokens";
-import pkg from "@jaidensiu/world-design-system/package.json";
+import pkg from "@jaidensiu/nucleus/package.json";
 
 const TOKENS_VERSION = pkg.version;
-const GITHUB_URL = "https://github.com/jaidensiu/world-design-system";
+const GITHUB_URL = "https://github.com/jaidensiu/nucleus";
 
 type Tab = "colors" | "semantic" | "typography" | "spacing";
 type Theme = "light" | "dark";
@@ -21,7 +21,7 @@ function useTheme() {
   const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
-    const stored = localStorage.getItem("wds-theme") as Theme | null;
+    const stored = localStorage.getItem("nucleus-theme") as Theme | null;
     const initial =
       stored ||
       (window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -34,7 +34,7 @@ function useTheme() {
   function toggle() {
     const next = theme === "light" ? "dark" : "light";
     setTheme(next);
-    localStorage.setItem("wds-theme", next);
+    localStorage.setItem("nucleus-theme", next);
     document.documentElement.setAttribute("data-theme", next);
   }
 
@@ -319,7 +319,7 @@ function SpacingSection() {
               </span>
             </div>
             <span className="text-xs font-mono text-muted">
-              --wds-spacing-{token.name}
+              --nucleus-spacing-{token.name}
             </span>
           </div>
         ))}
@@ -405,7 +405,7 @@ export default function Home() {
         <div className="mx-auto max-w-5xl px-6 py-4 flex items-center justify-between">
           <div>
             <h1 className="text-lg font-semibold tracking-tight">
-              World Design System
+              Nucleus
             </h1>
             <p className="text-xs text-muted">
               Design tokens reference &middot; v{TOKENS_VERSION} &middot;{" "}
@@ -480,7 +480,7 @@ export default function Home() {
           <div className="px-6 py-4 flex items-center justify-between border-b border-border">
             <div>
               <h1 className="text-lg font-semibold tracking-tight">
-                World Design System
+                Nucleus
               </h1>
               <p className="text-xs text-muted">
                 Design tokens reference &middot; v{TOKENS_VERSION} &middot;{" "}
@@ -546,7 +546,7 @@ export default function Home() {
       </main>
       <footer className="border-t border-border mt-16">
         <div className="mx-auto max-w-5xl px-6 py-6 text-xs text-muted text-center">
-          World Design System &mdash; Tokens for Android, iOS, and Web
+          Nucleus &mdash; Tokens for Android, iOS, and Web
           <br />
           v{TOKENS_VERSION} &middot;{" "}
           <a

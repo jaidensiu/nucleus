@@ -59,8 +59,8 @@ const primitiveSources: string[] = [
 // Output paths
 // ---------------------------------------------------------------------------
 const androidOut =
-  'build/android/src/main/kotlin/com/jaidensiu/worldDesignSystem';
-const iosOut = 'build/ios/Sources/WorldDesignSystem';
+  'build/android/src/main/kotlin/com/jaidensiu/nucleus';
+const iosOut = 'build/ios/Sources/Nucleus';
 const webOut = 'build/web';
 
 // ---------------------------------------------------------------------------
@@ -80,19 +80,19 @@ async function buildTheme(theme: 'light' | 'dark'): Promise<void> {
           theme === 'light'
             ? [
                 {
-                  destination: 'WdsColorPalette.kt',
+                  destination: 'NucleusColorPalette.kt',
                   format: 'compose/colorObject',
-                  options: { objectName: 'WdsColorPalette' },
+                  options: { objectName: 'NucleusColorPalette' },
                   filter: (token: TransformedToken) =>
                     token.$type === 'color' && token.path[0] === 'color',
                 },
                 {
-                  destination: 'WdsTypography.kt',
+                  destination: 'NucleusTypography.kt',
                   format: 'compose/typography',
                   filter: (token: TransformedToken) => token.$type === 'typography',
                 },
                 {
-                  destination: 'WdsSpacing.kt',
+                  destination: 'NucleusSpacing.kt',
                   format: 'compose/spacing',
                   filter: (token: TransformedToken) =>
                     token.$type === 'dimension' &&
@@ -105,9 +105,9 @@ async function buildTheme(theme: 'light' | 'dark'): Promise<void> {
         buildPath: `${androidOut}/`,
         files: [
           {
-            destination: `Wds${themeLabel}ColorTokens.kt`,
+            destination: `Nucleus${themeLabel}ColorTokens.kt`,
             format: 'compose/themeColors',
-            options: { objectName: `Wds${themeLabel}ColorTokens` },
+            options: { objectName: `Nucleus${themeLabel}ColorTokens` },
             filter: (token: TransformedToken) =>
               token.$type === 'color' && token.path[0] === 'semantic',
           },
@@ -119,18 +119,18 @@ async function buildTheme(theme: 'light' | 'dark'): Promise<void> {
           theme === 'light'
             ? [
                 {
-                  destination: 'WdsColorPalette.swift',
-                  format: 'swift/wldColorDefaults',
+                  destination: 'NucleusColorPalette.swift',
+                  format: 'swift/nucleusColorDefaults',
                   filter: (token: TransformedToken) =>
                     token.$type === 'color' && token.path[0] === 'color',
                 },
                 {
-                  destination: 'WdsTypography.swift',
-                  format: 'swift/wldFontDefaults',
+                  destination: 'NucleusTypography.swift',
+                  format: 'swift/nucleusFontDefaults',
                   filter: (token: TransformedToken) => token.$type === 'typography',
                 },
                 {
-                  destination: 'WdsSpacing.swift',
+                  destination: 'NucleusSpacing.swift',
                   format: 'swift/spacing',
                   filter: (token: TransformedToken) =>
                     token.$type === 'dimension' &&
@@ -143,9 +143,9 @@ async function buildTheme(theme: 'light' | 'dark'): Promise<void> {
         buildPath: `${iosOut}/`,
         files: [
           {
-            destination: `Wds${themeLabel}ColorTokens.swift`,
-            format: 'swift/wldColorTheme',
-            options: { structName: `Wds${themeLabel}ColorTokens` },
+            destination: `Nucleus${themeLabel}ColorTokens.swift`,
+            format: 'swift/nucleusColorTheme',
+            options: { structName: `Nucleus${themeLabel}ColorTokens` },
             filter: (token: TransformedToken) =>
               token.$type === 'color' && token.path[0] === 'semantic',
           },
@@ -157,18 +157,18 @@ async function buildTheme(theme: 'light' | 'dark'): Promise<void> {
           theme === 'light'
             ? [
                 {
-                  destination: 'wds-color-palette.css',
+                  destination: 'nucleus-color-palette.css',
                   format: 'css/colorVariables',
                   filter: (token: TransformedToken) =>
                     token.$type === 'color' && token.path[0] === 'color',
                 },
                 {
-                  destination: 'wds-typography.css',
+                  destination: 'nucleus-typography.css',
                   format: 'css/typography',
                   filter: (token: TransformedToken) => token.$type === 'typography',
                 },
                 {
-                  destination: 'wds-spacing.css',
+                  destination: 'nucleus-spacing.css',
                   format: 'css/spacing',
                   filter: (token: TransformedToken) =>
                     token.$type === 'dimension' &&
@@ -199,7 +199,7 @@ async function buildTheme(theme: 'light' | 'dark'): Promise<void> {
         buildPath: `${webOut}/`,
         files: [
           {
-            destination: `wds-${theme}-theme.css`,
+            destination: `nucleus-${theme}-theme.css`,
             format: 'css/themeVariables',
             options: {
               selector: theme === 'light'
@@ -248,16 +248,16 @@ function copyTemplates(): void {
       to: 'build/android/settings.gradle.kts',
     },
     {
-      from: 'templates/android/src/main/kotlin/com/jaidensiu/worldDesignSystem/WdsTheme.kt',
-      to: `${androidOut}/WdsTheme.kt`,
+      from: 'templates/android/src/main/kotlin/com/jaidensiu/nucleus/NucleusTheme.kt',
+      to: `${androidOut}/NucleusTheme.kt`,
     },
     {
       from: 'templates/ios/Package.swift',
       to: 'build/ios/Package.swift',
     },
     {
-      from: 'templates/ios/Sources/WorldDesignSystem/WdsTheme.swift',
-      to: `${iosOut}/WdsTheme.swift`,
+      from: 'templates/ios/Sources/Nucleus/NucleusTheme.swift',
+      to: `${iosOut}/NucleusTheme.swift`,
     },
     {
       from: 'templates/web/package.json',
@@ -286,7 +286,7 @@ function copyTemplates(): void {
 // Main
 // ---------------------------------------------------------------------------
 async function main(): Promise<void> {
-  console.log('Building World Design System tokens\u2026\n');
+  console.log('Building Nucleus tokens\u2026\n');
   await buildTheme('light');
   await buildTheme('dark');
   copyTemplates();

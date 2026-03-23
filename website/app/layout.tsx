@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "World Design System",
+  title: "Nucleus",
   description:
-    "Design tokens for World — colors, typography, and spacing across platforms.",
+    "Design tokens for Nucleus — colors, typography, and spacing across platforms.",
 };
 
 export default function RootLayout({

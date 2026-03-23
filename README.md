@@ -1,4 +1,4 @@
-# World Design System
+# Nucleus
 
 Cross-platform design tokens that define the foundational UI layer and visual identity of the World ecosystem.
 
@@ -9,7 +9,7 @@ Cross-platform design tokens that define the foundational UI layer and visual id
 1. **Primitive tokens** – Raw palette values (grey, error, warning, success, info, specialty). Theme-agnostic.
 2. **Semantic tokens** – Role-based references (`background.primary`, `text.primary`, `action.primary`). Resolve differently per light/dark theme.
 
-**Platform outputs are standalone** – no dependency on app-specific types. Android gets Compose `Color` objects; iOS gets raw hex `String` constants and a `WdsFontSpec` struct; Web gets CSS custom properties and JSON files. The consuming app bridges these to its own types (e.g. `WLDColor`, `WLDFont`).
+**Platform outputs are standalone** – no dependency on app-specific types. Android gets Compose `Color` objects; iOS gets raw hex `String` constants and a `NucleusFontSpec` struct; Web gets CSS custom properties and JSON files. The consuming app bridges these to its own types.
 
 ## Quick Start
 
@@ -41,26 +41,26 @@ Generated files appear in `build/`:
 
 ### Android (Kotlin/Compose)
 
-- `WdsColorPalette` – Primitive colors as `Color` objects
-- `WdsLightColorTokens` / `WdsDarkColorTokens` – Semantic theme colors
-- `WdsTypography` – Type scale as `TextStyle` values
-- `WdsSpacing` – Spacing scale as `Dp` values
-- `WdsTheme` – Composable theme provider with `Wds.colors` accessor
+- `NucleusColorPalette` – Primitive colors as `Color` objects
+- `NucleusLightColorTokens` / `NucleusDarkColorTokens` – Semantic theme colors
+- `NucleusTypography` – Type scale as `TextStyle` values
+- `NucleusSpacing` – Spacing scale as `Dp` values
+- `NucleusTheme` – Composable theme provider with `Nucleus.colors` accessor
 
 ### iOS (Swift)
 
-- `WdsColorPalette` – Primitive colors as hex `String` constants
-- `WdsLightColorTokens` / `WdsDarkColorTokens` – Semantic theme colors as hex strings
-- `WdsTypography` – Type scale as `WdsFontSpec` values
-- `WdsSpacing` – Spacing scale as `CGFloat` values
-- `WdsTheme` – Light/dark `WdsSemanticColors` bundles
+- `NucleusColorPalette` – Primitive colors as hex `String` constants
+- `NucleusLightColorTokens` / `NucleusDarkColorTokens` – Semantic theme colors as hex strings
+- `NucleusTypography` – Type scale as `NucleusFontSpec` values
+- `NucleusSpacing` – Spacing scale as `CGFloat` values
+- `NucleusTheme` – Light/dark `NucleusSemanticColors` bundles
 
 ### Web (CSS / JSON)
 
-- `wds-color-palette.css` – Primitive colors as CSS custom properties (`--wds-color-*`)
-- `wds-light-theme.css` / `wds-dark-theme.css` – Semantic theme colors as CSS custom properties (`--wds-*`)
-- `wds-typography.css` – Typography as CSS custom properties (`--wds-typography-*`)
-- `wds-spacing.css` – Spacing as CSS custom properties (`--wds-spacing-*`)
+- `nucleus-color-palette.css` – Primitive colors as CSS custom properties (`--nucleus-color-*`)
+- `nucleus-light-theme.css` / `nucleus-dark-theme.css` – Semantic theme colors as CSS custom properties (`--nucleus-*`)
+- `nucleus-typography.css` – Typography as CSS custom properties (`--nucleus-typography-*`)
+- `nucleus-spacing.css` – Spacing as CSS custom properties (`--nucleus-spacing-*`)
 - `tokens.json` / `light-theme.json` / `dark-theme.json` / `typography.json` / `spacing.json` – JSON token files for programmatic use
 
 ## CI/CD
@@ -86,7 +86,7 @@ Add the GitHub Packages Maven repository to `settings.gradle`:
 
 ```groovy
 maven {
-    url = uri("https://maven.pkg.github.com/jaidensiu/world-design-system")
+    url = uri("https://maven.pkg.github.com/jaidensiu/nucleus")
     credentials {
         username = System.getenv("GITHUB_USER")
         password = System.getenv("GITHUB_TOKEN")
@@ -97,28 +97,28 @@ maven {
 Then add the dependency:
 
 ```groovy
-implementation "com.jaidensiu:world-design-system:<version>"
+implementation "com.jaidensiu:nucleus:<version>"
 ```
 
-Wrap your composable tree in `WdsTheme { ... }` and access tokens via `Wds.colors`, `WdsTypography`, `WdsSpacing`, etc.
+Wrap your composable tree in `NucleusTheme { ... }` and access tokens via `Nucleus.colors`, `NucleusTypography`, `NucleusSpacing`, etc.
 
 ### iOS
 
 Add the SPM dependency in your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/jaidensiu/world-design-system.git", branch: "generated/ios")
+.package(url: "https://github.com/jaidensiu/nucleus.git", branch: "generated/ios")
 ```
 
 Or pin to a specific release tag (e.g. `v0.1.0-ios`).
 
-Then add `WorldDesignSystem` as a dependency on your target:
+Then add `Nucleus` as a dependency on your target:
 
 ```swift
 .target(
     name: "YourTarget",
     dependencies: [
-        .product(name: "WorldDesignSystem", package: "world-design-system"),
+        .product(name: "Nucleus", package: "nucleus"),
     ]
 )
 ```
@@ -126,17 +126,17 @@ Then add `WorldDesignSystem` as a dependency on your target:
 Bridge the standalone tokens to your app types:
 
 ```swift
-import WorldDesignSystem
+import Nucleus
 
-// Colors – WdsColorPalette contains hex strings
-let color = WLDColor(WdsColorPalette.colorGrey900)
+// Colors – NucleusColorPalette contains hex strings
+let color = WLDColor(NucleusColorPalette.colorGrey900)
 
-// Typography – WdsTypography contains WdsFontSpec values
-let spec = WdsTypography.h1
+// Typography – NucleusTypography contains NucleusFontSpec values
+let spec = NucleusTypography.h1
 let font = WLDFont(size: spec.size, weight: Weight(integerLiteral: Int(spec.weight)), ...)
 
 // Semantic themes
-let lightBg = WdsTheme.light.backgroundPrimary  // hex String
+let lightBg = NucleusTheme.light.backgroundPrimary  // hex String
 ```
 
 ### Web
@@ -150,38 +150,38 @@ Add a `.npmrc` to your project:
 Then install the package:
 
 ```bash
-npm install @jaidensiu/world-design-system
+npm install @jaidensiu/nucleus
 ```
 
 **CSS custom properties** – import the stylesheets you need:
 
 ```css
-@import "@jaidensiu/world-design-system/wds-color-palette.css";
-@import "@jaidensiu/world-design-system/wds-light-theme.css";
-@import "@jaidensiu/world-design-system/wds-dark-theme.css";
-@import "@jaidensiu/world-design-system/wds-typography.css";
-@import "@jaidensiu/world-design-system/wds-spacing.css";
+@import "@jaidensiu/nucleus/nucleus-color-palette.css";
+@import "@jaidensiu/nucleus/nucleus-light-theme.css";
+@import "@jaidensiu/nucleus/nucleus-dark-theme.css";
+@import "@jaidensiu/nucleus/nucleus-typography.css";
+@import "@jaidensiu/nucleus/nucleus-spacing.css";
 ```
 
 Then use the variables:
 
 ```css
 .card {
-  background: var(--wds-background-primary);
-  color: var(--wds-text-primary);
-  padding: var(--wds-spacing-md);
-  border: 1px solid var(--wds-border-default);
+  background: var(--nucleus-background-primary);
+  color: var(--nucleus-text-primary);
+  padding: var(--nucleus-spacing-md);
+  border: 1px solid var(--nucleus-border-default);
 }
 ```
 
 **JSON tokens** – import directly for JS/TS usage:
 
 ```ts
-import tokens from "@jaidensiu/world-design-system/tokens.json";
-import lightTheme from "@jaidensiu/world-design-system/light-theme.json";
-import darkTheme from "@jaidensiu/world-design-system/dark-theme.json";
-import typography from "@jaidensiu/world-design-system/typography.json";
-import spacing from "@jaidensiu/world-design-system/spacing.json";
+import tokens from "@jaidensiu/nucleus/tokens.json";
+import lightTheme from "@jaidensiu/nucleus/light-theme.json";
+import darkTheme from "@jaidensiu/nucleus/dark-theme.json";
+import typography from "@jaidensiu/nucleus/typography.json";
+import spacing from "@jaidensiu/nucleus/spacing.json";
 ```
 
 ## Adding / Modifying Tokens

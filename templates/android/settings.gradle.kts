@@ -1,1 +1,1 @@
-rootProject.name = "world-design-system"
+rootProject.name = "nucleus"

@@ -1,6 +1,6 @@
 {
-  "name": "@jaidensiu/world-design-system",
-  "description": "World Design System tokens for Web — CSS custom properties and JSON",
+  "name": "@jaidensiu/nucleus",
+  "description": "Nucleus design tokens for Web — CSS custom properties and JSON",
   "license": "UNLICENSED",
   "main": "tokens.json",
   "types": "index.d.ts",
@@ -14,6 +14,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jaidensiu/world-design-system.git"
+    "url": "https://github.com/jaidensiu/nucleus.git"
   }
 }

@@ -5,7 +5,7 @@
 import type { Format, FormatFnArguments } from 'style-dictionary/types';
 import type { TypographyTokenValue, FontWeightKey } from './types.js';
 
-const PACKAGE = 'com.jaidensiu.worldDesignSystem';
+const PACKAGE = 'com.jaidensiu.nucleus';
 
 function hexToArgb(hex: string): string {
   const h = hex.replace('#', '');
@@ -36,7 +36,7 @@ function fontWeightToCompose(weight: number): string {
 export const composeColorObject: Format = {
   name: 'compose/colorObject',
   format: ({ dictionary, options }: FormatFnArguments) => {
-    const objectName = (options.objectName as string) || 'WdsColorPalette';
+    const objectName = (options.objectName as string) || 'NucleusColorPalette';
     const tokens = dictionary.allTokens.filter((t) => t.$type === 'color');
 
     const lines = tokens.map((token) => {
@@ -65,7 +65,7 @@ export const composeColorObject: Format = {
 export const composeThemeColors: Format = {
   name: 'compose/themeColors',
   format: ({ dictionary, options }: FormatFnArguments) => {
-    const objectName = (options.objectName as string) || 'LightColorTokens';
+    const objectName = (options.objectName as string) || 'NucleusLightColorTokens';
     const tokens = dictionary.allTokens.filter(
       (t) => t.$type === 'color' && t.path[0] === 'semantic',
     );
@@ -110,7 +110,7 @@ export const composeTypography: Format = {
           : '';
       return [
         `    val ${name} = TextStyle(`,
-        '        fontFamily = WorldProFontFamily,',
+        '        fontFamily = NucleusFontFamily,',
         `        fontWeight = ${fontWeightToCompose(v.fontWeight)},`,
         `        fontSize = ${fontSize}.sp,`,
         `        lineHeight = ${lineHeight}.sp,${letterSpacing}`,
@@ -129,9 +129,9 @@ export const composeTypography: Format = {
       'import androidx.compose.ui.unit.sp',
       '',
       '// Font family must be provided by the consuming app',
-      'val WorldProFontFamily = FontFamily.Default',
+      'val NucleusFontFamily = FontFamily.Default',
       '',
-      'object WdsTypography {',
+      'object NucleusTypography {',
       ...lines,
       '}',
       '',
@@ -161,7 +161,7 @@ export const composeSpacing: Format = {
       'import androidx.compose.ui.unit.dp',
       'import androidx.compose.ui.unit.Dp',
       '',
-      'object WdsSpacing {',
+      'object NucleusSpacing {',
       ...lines,
       '}',
       '',
