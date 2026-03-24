@@ -13,7 +13,7 @@ Cross-platform design tokens that define the foundational UI layer and visual id
 ```mermaid
 graph TD
     A[JSON Token Definitions] --> B[Style Dictionary]
-    B --> C[Custom Formatters]
+    B --> C[Custom Formats]
     C -->|Gradle templates| D[Android]
     C -->|SPM templates| E[iOS]
     C -->|npm templates| F[Web]
