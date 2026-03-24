@@ -3,20 +3,20 @@
 import PackageDescription
 
 let package = Package(
-    name: "WorldDesignSystem",
+    name: "Nucleus",
     platforms: [
         .iOS(.v15),
     ],
     products: [
         .library(
-            name: "WorldDesignSystem",
-            targets: ["WorldDesignSystem"]
+            name: "Nucleus",
+            targets: ["Nucleus"]
         ),
     ],
     targets: [
         .target(
-            name: "WorldDesignSystem",
-            path: "Sources/WorldDesignSystem"
+            name: "Nucleus",
+            path: "Sources/Nucleus"
         ),
     ]
 )
