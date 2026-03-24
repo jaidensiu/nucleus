@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.0
+- [Full changelog](https://github.com/jaidensiu/nucleus/compare/v0.2.0...v0.3.0)
+
+
 ## v0.2.0
 - [Full changelog](https://github.com/jaidensiu/nucleus/compare/v0.1.10...v0.2.0)
 
