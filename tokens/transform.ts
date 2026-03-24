@@ -4,11 +4,11 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import type { Format, TransformedToken } from 'style-dictionary/types';
 
-import { composeColorObject } from './formats/compose.js';
-import { swiftColorDefaults } from './formats/swift.js';
-import { cssColorVariables, jsonFlat } from './formats/css.js';
+import { composeColorObject } from '../formats/compose.js';
+import { swiftColorDefaults } from '../formats/swift.js';
+import { cssColorVariables, jsonFlat } from '../formats/css.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 // ---------------------------------------------------------------------------
 // Register all custom formats
@@ -30,8 +30,7 @@ const sources: string[] = [
 // ---------------------------------------------------------------------------
 // Output paths
 // ---------------------------------------------------------------------------
-const androidOut =
-  'build/android/src/main/kotlin/com/jaidensiu/nucleus';
+const androidOut = 'build/android/src/main/kotlin/com/jaidensiu/nucleus';
 const iosOut = 'build/ios/Sources/Nucleus';
 const webOut = 'build/web';
 
@@ -127,8 +126,8 @@ function copyTemplates(): void {
   ];
 
   for (const { from, to } of copies) {
-    const src = resolve(__dirname, from);
-    const dest = resolve(__dirname, to);
+    const src = resolve(ROOT, from);
+    const dest = resolve(ROOT, to);
     if (!existsSync(src)) {
       console.warn(`  \u26A0 template not found: ${from}`);
       continue;

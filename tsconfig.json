@@ -12,6 +12,6 @@
     "forceConsistentCasingInFileNames": true,
     "types": ["node"]
   },
-  "include": ["config.ts", "formats/**/*.ts"],
+  "include": ["tokens/transform.ts", "formats/**/*.ts"],
   "exclude": ["node_modules", "build"]
 }

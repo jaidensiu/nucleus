@@ -5,7 +5,7 @@
   "description": "Nucleus – cross-platform design tokens",
   "type": "module",
   "scripts": {
-    "build": "tsx config.ts",
+    "build": "tsx tokens/transform.ts",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint",
     "clean": "rm -rf build"

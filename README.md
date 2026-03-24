@@ -8,6 +8,17 @@ Cross-platform design tokens that define the foundational UI layer and visual id
 
 **Platform outputs are standalone** – no dependency on app-specific types. Android gets Compose `Color` objects; iOS gets raw hex `String` constants; Web gets CSS custom properties and JSON files. The consuming app bridges these to its own types.
 
+## Token Transformation Pipeline
+
+```mermaid
+graph TD
+    A[JSON Token Definitions] --> B[Style Dictionary]
+    B --> C[Custom Formatters]
+    C -->|Gradle templates| D[Android]
+    C -->|SPM templates| E[iOS]
+    C -->|npm templates| F[Web]
+```
+
 ## Quick Start
 
 ```bash
