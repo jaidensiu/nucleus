@@ -1,8 +1,8 @@
 {
-  "name": "nucleus",
+  "name": "@jaidensiu/nucleus",
   "version": "0.2.0",
   "private": true,
-  "description": "Nucleus – cross-platform design tokens",
+  "description": "Design tokens for the World ecosystem",
   "type": "module",
   "scripts": {
     "build": "tsx tokens/transform.ts",
