@@ -7,22 +7,6 @@ import pkg from "@jaidensiu/nucleus/package.json";
 const TOKENS_VERSION = pkg.version;
 const GITHUB_URL = "https://github.com/jaidensiu/nucleus";
 
-function CopyButton({ text }: { text: string }) {
-  const [copied, setCopied] = useState(false);
-  return (
-    <button
-      onClick={() => {
-        navigator.clipboard.writeText(text);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1200);
-      }}
-      className="ml-2 shrink-0 rounded px-1.5 py-0.5 text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity bg-foreground/5 hover:bg-foreground/10"
-    >
-      {copied ? "Copied" : "Copy"}
-    </button>
-  );
-}
-
 function ColorCard({
   groupName,
   name,
@@ -32,10 +16,18 @@ function ColorCard({
   name: string;
   value: string;
 }) {
+  const [copied, setCopied] = useState(false);
   const groupKey = groupName.replace(/\s+/g, "");
   const fullName = groupName === "Other" ? name : `${groupKey.charAt(0).toLowerCase() + groupKey.slice(1)}.${name}`;
   return (
-    <div className="group flex items-center gap-3 rounded-lg border border-border px-3 py-2.5 hover:bg-surface transition-colors">
+    <button
+      onClick={() => {
+        navigator.clipboard.writeText(value);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1200);
+      }}
+      className="group flex items-center gap-3 rounded-lg border border-border px-3 py-2.5 hover:bg-surface transition-colors cursor-pointer text-left w-full"
+    >
       <div
         className="h-10 w-10 rounded-md border border-black/10 shrink-0"
         style={{ backgroundColor: value }}
@@ -44,8 +36,10 @@ function ColorCard({
         <div className="text-sm font-medium truncate">{fullName}</div>
         <div className="text-xs font-mono text-muted">{value}</div>
       </div>
-      <CopyButton text={value} />
-    </div>
+      <span className="shrink-0 text-xs font-mono text-muted opacity-0 group-hover:opacity-100 transition-opacity">
+        {copied ? "Copied!" : "Click to copy"}
+      </span>
+    </button>
   );
 }
 
@@ -59,9 +53,12 @@ function ColorsSection() {
         </p>
         {primitiveColors.map((group) => (
           <div key={group.name} className="mb-8">
-            <h3 className="text-sm font-semibold text-muted uppercase tracking-wider mb-3">
-              {group.name}
-            </h3>
+            <div className="mb-3">
+              <h3 className="text-sm font-semibold tracking-wider">
+                {group.name}
+              </h3>
+              <p className="text-xs text-muted">{group.colors.length} colors</p>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
               {group.colors.map((c) => (
                 <ColorCard
@@ -105,7 +102,7 @@ export default function Home() {
       </main>
       <footer className="border-t border-border mt-16">
         <div className="mx-auto max-w-5xl px-6 py-6 text-xs text-muted text-center">
-          Nucleus &mdash; Tokens for Android, iOS, and Web
+          Nucleus &mdash; Design tokens for Android, iOS, and Web
           <br />
           v{TOKENS_VERSION} &middot;{" "}
           <a
