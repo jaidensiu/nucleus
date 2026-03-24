@@ -4,12 +4,9 @@ Cross-platform design tokens that define the foundational UI layer and visual id
 
 ## Architecture
 
-**Two-layer token system:**
+**Primitive tokens** – Raw palette values (grey, error, warning, success, info). Theme-agnostic.
 
-1. **Primitive tokens** – Raw palette values (grey, error, warning, success, info, specialty). Theme-agnostic.
-2. **Semantic tokens** – Role-based references (`background.primary`, `text.primary`, `action.primary`). Resolve differently per light/dark theme.
-
-**Platform outputs are standalone** – no dependency on app-specific types. Android gets Compose `Color` objects; iOS gets raw hex `String` constants and a `NucleusFontSpec` struct; Web gets CSS custom properties and JSON files. The consuming app bridges these to its own types.
+**Platform outputs are standalone** – no dependency on app-specific types. Android gets Compose `Color` objects; iOS gets raw hex `String` constants; Web gets CSS custom properties and JSON files. The consuming app bridges these to its own types.
 
 ## Quick Start
 
@@ -20,48 +17,32 @@ npm run build
 
 Generated files appear in `build/`:
 
-| Platform | Path | Contents |
-|----------|------|----------|
+| Platform | Path             | Contents                                                                            |
+| -------- | ---------------- | ----------------------------------------------------------------------------------- |
 | Android  | `build/android/` | Kotlin objects with Compose `Color` values, `build.gradle.kts` for Maven publishing |
-| iOS      | `build/ios/` | Standalone Swift enums/structs with hex string constants, `Package.swift` for SPM |
-| Web      | `build/web/` | CSS custom properties, JSON token files, `package.json` for npm publishing |
+| iOS      | `build/ios/`     | Standalone Swift enums with hex string constants, `Package.swift` for SPM           |
+| Web      | `build/web/`     | CSS custom properties, JSON token files, `package.json` for npm publishing          |
 
 ## Token Files
 
-| File | Description |
-|------|-------------|
+| File                               | Description                                  |
+| ---------------------------------- | -------------------------------------------- |
 | `tokens/color/primitive/base.json` | Grey, error, warning, success, info palettes |
-| `tokens/color/primitive/specialty.json` | Brand colors (worldBlue, carrotOrange, purple, etc.) |
-| `tokens/color/semantic/light.json` | Semantic-to-primitive mappings for light theme |
-| `tokens/color/semantic/dark.json` | Semantic-to-primitive mappings for dark theme |
-| `tokens/typography/scale.json` | Full type scale (d1, n1-5, h1-4, s1-4, l1-3, b1-4) |
-| `tokens/spacing/spacing.json` | Spacing scale (xxs through xxl) |
 
 ## Generated Output
 
-### Android (Kotlin/Compose)
+### Android
 
 - `NucleusColorPalette` – Primitive colors as `Color` objects
-- `NucleusLightColorTokens` / `NucleusDarkColorTokens` – Semantic theme colors
-- `NucleusTypography` – Type scale as `TextStyle` values
-- `NucleusSpacing` – Spacing scale as `Dp` values
-- `NucleusTheme` – Composable theme provider with `Nucleus.colors` accessor
 
-### iOS (Swift)
+### iOS
 
 - `NucleusColorPalette` – Primitive colors as hex `String` constants
-- `NucleusLightColorTokens` / `NucleusDarkColorTokens` – Semantic theme colors as hex strings
-- `NucleusTypography` – Type scale as `NucleusFontSpec` values
-- `NucleusSpacing` – Spacing scale as `CGFloat` values
-- `NucleusTheme` – Light/dark `NucleusSemanticColors` bundles
 
-### Web (CSS / JSON)
+### Web
 
 - `nucleus-color-palette.css` – Primitive colors as CSS custom properties (`--nucleus-color-*`)
-- `nucleus-light-theme.css` / `nucleus-dark-theme.css` – Semantic theme colors as CSS custom properties (`--nucleus-*`)
-- `nucleus-typography.css` – Typography as CSS custom properties (`--nucleus-typography-*`)
-- `nucleus-spacing.css` – Spacing as CSS custom properties (`--nucleus-spacing-*`)
-- `tokens.json` / `light-theme.json` / `dark-theme.json` / `typography.json` / `spacing.json` – JSON token files for programmatic use
+- `tokens.json` – JSON token file for programmatic use
 
 ## CI/CD
 
@@ -100,7 +81,7 @@ Then add the dependency:
 implementation "com.jaidensiu:nucleus:<version>"
 ```
 
-Wrap your composable tree in `NucleusTheme { ... }` and access tokens via `Nucleus.colors`, `NucleusTypography`, `NucleusSpacing`, etc.
+Access primitive colors via `NucleusColorPalette`.
 
 ### iOS
 
@@ -123,20 +104,12 @@ Then add `Nucleus` as a dependency on your target:
 )
 ```
 
-Bridge the standalone tokens to your app types:
+Access primitive colors as hex strings:
 
 ```swift
 import Nucleus
 
-// Colors – NucleusColorPalette contains hex strings
-let color = WLDColor(NucleusColorPalette.colorGrey900)
-
-// Typography – NucleusTypography contains NucleusFontSpec values
-let spec = NucleusTypography.h1
-let font = WLDFont(size: spec.size, weight: Weight(integerLiteral: Int(spec.weight)), ...)
-
-// Semantic themes
-let lightBg = NucleusTheme.light.backgroundPrimary  // hex String
+let hex = NucleusColorPalette.colorGrey900 // "181818"
 ```
 
 ### Web
@@ -153,24 +126,18 @@ Then install the package:
 npm install @jaidensiu/nucleus
 ```
 
-**CSS custom properties** – import the stylesheets you need:
+**CSS custom properties** – import the stylesheet:
 
 ```css
 @import "@jaidensiu/nucleus/nucleus-color-palette.css";
-@import "@jaidensiu/nucleus/nucleus-light-theme.css";
-@import "@jaidensiu/nucleus/nucleus-dark-theme.css";
-@import "@jaidensiu/nucleus/nucleus-typography.css";
-@import "@jaidensiu/nucleus/nucleus-spacing.css";
 ```
 
 Then use the variables:
 
 ```css
 .card {
-  background: var(--nucleus-background-primary);
-  color: var(--nucleus-text-primary);
-  padding: var(--nucleus-spacing-md);
-  border: 1px solid var(--nucleus-border-default);
+  color: var(--nucleus-color-grey-900);
+  border: 1px solid var(--nucleus-color-grey-200);
 }
 ```
 
@@ -178,10 +145,6 @@ Then use the variables:
 
 ```ts
 import tokens from "@jaidensiu/nucleus/tokens.json";
-import lightTheme from "@jaidensiu/nucleus/light-theme.json";
-import darkTheme from "@jaidensiu/nucleus/dark-theme.json";
-import typography from "@jaidensiu/nucleus/typography.json";
-import spacing from "@jaidensiu/nucleus/spacing.json";
 ```
 
 ## Adding / Modifying Tokens

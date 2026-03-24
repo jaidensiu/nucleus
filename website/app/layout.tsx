@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Nucleus",
   description:
-    "Design tokens for Nucleus — colors, typography, and spacing across platforms.",
+    "Design tokens for Nucleus — colors across platforms.",
 };
 
 export default function RootLayout({

@@ -13,7 +13,6 @@
       "700": { "$value": "#3C424B", "$type": "color" },
       "900": { "$value": "#181818", "$type": "color" }
     },
-    "black": { "$value": "#000000", "$type": "color" },
     "error": {
       "100": { "$value": "#FEE9E7", "$type": "color" },
       "200": { "$value": "#FDD3CF", "$type": "color" },

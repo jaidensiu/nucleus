@@ -1,6 +1,6 @@
 # Nucleus Website
 
-Token reference website for Nucleus. Displays all design tokens (colors, typography, spacing) with light/dark theme support.
+Token reference website for Nucleus. Displays primitive color tokens.
 
 Live at [nucleus.vercel.app](https://nucleus.vercel.app).
 
