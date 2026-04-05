@@ -1,6 +1,9 @@
 # Web Example
 
-Web sample app for Nucleus. Displays primitive color tokens from the generated files in `build/web`.
+Web sample app for Nucleus with two token source modes:
+
+- `local` reads generated files directly from `build/web`
+- `package` reads the local npm package artifact from `build/web`
 
 ## Setup
 
@@ -10,9 +13,7 @@ cd examples/web
 npm install
 ```
 
-The web example reads the generated token files in `build/web` directly. It does not install or depend on the generated npm package.
-
-At the moment the app documents the primitive color layer only.
+Run `npm install` after `npm run build` so the local package artifact in `build/web` can resolve for package mode.
 
 ## Development
 
@@ -21,3 +22,15 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+Use package mode with:
+
+```bash
+npm run dev:package
+```
+
+Build package mode with:
+
+```bash
+npm run build:package
+```

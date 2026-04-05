@@ -9,7 +9,7 @@ struct ContentView: View {
                         VStack(alignment: .leading, spacing: 12) {
                             Text(group.name)
                                 .font(.headline)
-                                .foregroundStyle(Color(hex: NucleusColorTokens.colorGrey950))
+                                .foregroundStyle(Color(hex: AppNucleusColorTokens.colorGrey950))
 
                             ForEach(group.tokens) { token in
                                 HStack(spacing: 12) {
@@ -18,22 +18,22 @@ struct ContentView: View {
                                         .frame(width: 44, height: 44)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 12)
-                                                .stroke(Color(hex: NucleusColorTokens.colorGrey200), lineWidth: 1)
+                                                .stroke(Color(hex: AppNucleusColorTokens.colorGrey200), lineWidth: 1)
                                         )
 
                                     VStack(alignment: .leading, spacing: 4) {
                                         Text(token.name)
                                             .font(.body)
-                                            .foregroundStyle(Color(hex: NucleusColorTokens.colorGrey950))
+                                            .foregroundStyle(Color(hex: AppNucleusColorTokens.colorGrey950))
                                         Text("#\(token.hex)")
                                             .font(.caption)
-                                            .foregroundStyle(Color(hex: NucleusColorTokens.colorGrey700))
+                                            .foregroundStyle(Color(hex: AppNucleusColorTokens.colorGrey700))
                                     }
 
                                     Spacer()
                                 }
                                 .padding(14)
-                                .background(Color(hex: NucleusColorTokens.colorGrey0))
+                                .background(Color(hex: AppNucleusColorTokens.colorGrey0))
                                 .clipShape(RoundedRectangle(cornerRadius: 16))
                             }
                         }
@@ -41,7 +41,7 @@ struct ContentView: View {
                 }
                 .padding(16)
             }
-            .background(Color(hex: NucleusColorTokens.colorGrey50))
+            .background(Color(hex: AppNucleusColorTokens.colorGrey50))
             .navigationTitle("Nucleus")
         }
         .navigationViewStyle(.stack)
@@ -65,78 +65,78 @@ private let primitiveGroups: [TokenGroup] = [
         id: "grey",
         name: "Grey",
         tokens: [
-            TokenSwatch(id: "colorGrey0", name: "colorGrey0", hex: NucleusColorTokens.colorGrey0),
-            TokenSwatch(id: "colorGrey50", name: "colorGrey50", hex: NucleusColorTokens.colorGrey50),
-            TokenSwatch(id: "colorGrey100", name: "colorGrey100", hex: NucleusColorTokens.colorGrey100),
-            TokenSwatch(id: "colorGrey200", name: "colorGrey200", hex: NucleusColorTokens.colorGrey200),
-            TokenSwatch(id: "colorGrey300", name: "colorGrey300", hex: NucleusColorTokens.colorGrey300),
-            TokenSwatch(id: "colorGrey400", name: "colorGrey400", hex: NucleusColorTokens.colorGrey400),
-            TokenSwatch(id: "colorGrey500", name: "colorGrey500", hex: NucleusColorTokens.colorGrey500),
-            TokenSwatch(id: "colorGrey600", name: "colorGrey600", hex: NucleusColorTokens.colorGrey600),
-            TokenSwatch(id: "colorGrey700", name: "colorGrey700", hex: NucleusColorTokens.colorGrey700),
-            TokenSwatch(id: "colorGrey800", name: "colorGrey800", hex: NucleusColorTokens.colorGrey800),
-            TokenSwatch(id: "colorGrey900", name: "colorGrey900", hex: NucleusColorTokens.colorGrey900),
-            TokenSwatch(id: "colorGrey950", name: "colorGrey950", hex: NucleusColorTokens.colorGrey950),
+            TokenSwatch(id: "colorGrey0", name: "colorGrey0", hex: AppNucleusColorTokens.colorGrey0),
+            TokenSwatch(id: "colorGrey50", name: "colorGrey50", hex: AppNucleusColorTokens.colorGrey50),
+            TokenSwatch(id: "colorGrey100", name: "colorGrey100", hex: AppNucleusColorTokens.colorGrey100),
+            TokenSwatch(id: "colorGrey200", name: "colorGrey200", hex: AppNucleusColorTokens.colorGrey200),
+            TokenSwatch(id: "colorGrey300", name: "colorGrey300", hex: AppNucleusColorTokens.colorGrey300),
+            TokenSwatch(id: "colorGrey400", name: "colorGrey400", hex: AppNucleusColorTokens.colorGrey400),
+            TokenSwatch(id: "colorGrey500", name: "colorGrey500", hex: AppNucleusColorTokens.colorGrey500),
+            TokenSwatch(id: "colorGrey600", name: "colorGrey600", hex: AppNucleusColorTokens.colorGrey600),
+            TokenSwatch(id: "colorGrey700", name: "colorGrey700", hex: AppNucleusColorTokens.colorGrey700),
+            TokenSwatch(id: "colorGrey800", name: "colorGrey800", hex: AppNucleusColorTokens.colorGrey800),
+            TokenSwatch(id: "colorGrey900", name: "colorGrey900", hex: AppNucleusColorTokens.colorGrey900),
+            TokenSwatch(id: "colorGrey950", name: "colorGrey950", hex: AppNucleusColorTokens.colorGrey950),
         ]
     ),
     TokenGroup(
         id: "error",
         name: "Error",
         tokens: [
-            TokenSwatch(id: "colorError100", name: "colorError100", hex: NucleusColorTokens.colorError100),
-            TokenSwatch(id: "colorError200", name: "colorError200", hex: NucleusColorTokens.colorError200),
-            TokenSwatch(id: "colorError300", name: "colorError300", hex: NucleusColorTokens.colorError300),
-            TokenSwatch(id: "colorError400", name: "colorError400", hex: NucleusColorTokens.colorError400),
-            TokenSwatch(id: "colorError500", name: "colorError500", hex: NucleusColorTokens.colorError500),
-            TokenSwatch(id: "colorError600", name: "colorError600", hex: NucleusColorTokens.colorError600),
-            TokenSwatch(id: "colorError700", name: "colorError700", hex: NucleusColorTokens.colorError700),
-            TokenSwatch(id: "colorError800", name: "colorError800", hex: NucleusColorTokens.colorError800),
-            TokenSwatch(id: "colorError900", name: "colorError900", hex: NucleusColorTokens.colorError900),
+            TokenSwatch(id: "colorError100", name: "colorError100", hex: AppNucleusColorTokens.colorError100),
+            TokenSwatch(id: "colorError200", name: "colorError200", hex: AppNucleusColorTokens.colorError200),
+            TokenSwatch(id: "colorError300", name: "colorError300", hex: AppNucleusColorTokens.colorError300),
+            TokenSwatch(id: "colorError400", name: "colorError400", hex: AppNucleusColorTokens.colorError400),
+            TokenSwatch(id: "colorError500", name: "colorError500", hex: AppNucleusColorTokens.colorError500),
+            TokenSwatch(id: "colorError600", name: "colorError600", hex: AppNucleusColorTokens.colorError600),
+            TokenSwatch(id: "colorError700", name: "colorError700", hex: AppNucleusColorTokens.colorError700),
+            TokenSwatch(id: "colorError800", name: "colorError800", hex: AppNucleusColorTokens.colorError800),
+            TokenSwatch(id: "colorError900", name: "colorError900", hex: AppNucleusColorTokens.colorError900),
         ]
     ),
     TokenGroup(
         id: "warning",
         name: "Warning",
         tokens: [
-            TokenSwatch(id: "colorWarning100", name: "colorWarning100", hex: NucleusColorTokens.colorWarning100),
-            TokenSwatch(id: "colorWarning200", name: "colorWarning200", hex: NucleusColorTokens.colorWarning200),
-            TokenSwatch(id: "colorWarning300", name: "colorWarning300", hex: NucleusColorTokens.colorWarning300),
-            TokenSwatch(id: "colorWarning400", name: "colorWarning400", hex: NucleusColorTokens.colorWarning400),
-            TokenSwatch(id: "colorWarning500", name: "colorWarning500", hex: NucleusColorTokens.colorWarning500),
-            TokenSwatch(id: "colorWarning600", name: "colorWarning600", hex: NucleusColorTokens.colorWarning600),
-            TokenSwatch(id: "colorWarning700", name: "colorWarning700", hex: NucleusColorTokens.colorWarning700),
-            TokenSwatch(id: "colorWarning800", name: "colorWarning800", hex: NucleusColorTokens.colorWarning800),
-            TokenSwatch(id: "colorWarning900", name: "colorWarning900", hex: NucleusColorTokens.colorWarning900),
+            TokenSwatch(id: "colorWarning100", name: "colorWarning100", hex: AppNucleusColorTokens.colorWarning100),
+            TokenSwatch(id: "colorWarning200", name: "colorWarning200", hex: AppNucleusColorTokens.colorWarning200),
+            TokenSwatch(id: "colorWarning300", name: "colorWarning300", hex: AppNucleusColorTokens.colorWarning300),
+            TokenSwatch(id: "colorWarning400", name: "colorWarning400", hex: AppNucleusColorTokens.colorWarning400),
+            TokenSwatch(id: "colorWarning500", name: "colorWarning500", hex: AppNucleusColorTokens.colorWarning500),
+            TokenSwatch(id: "colorWarning600", name: "colorWarning600", hex: AppNucleusColorTokens.colorWarning600),
+            TokenSwatch(id: "colorWarning700", name: "colorWarning700", hex: AppNucleusColorTokens.colorWarning700),
+            TokenSwatch(id: "colorWarning800", name: "colorWarning800", hex: AppNucleusColorTokens.colorWarning800),
+            TokenSwatch(id: "colorWarning900", name: "colorWarning900", hex: AppNucleusColorTokens.colorWarning900),
         ]
     ),
     TokenGroup(
         id: "success",
         name: "Success",
         tokens: [
-            TokenSwatch(id: "colorSuccess100", name: "colorSuccess100", hex: NucleusColorTokens.colorSuccess100),
-            TokenSwatch(id: "colorSuccess200", name: "colorSuccess200", hex: NucleusColorTokens.colorSuccess200),
-            TokenSwatch(id: "colorSuccess300", name: "colorSuccess300", hex: NucleusColorTokens.colorSuccess300),
-            TokenSwatch(id: "colorSuccess400", name: "colorSuccess400", hex: NucleusColorTokens.colorSuccess400),
-            TokenSwatch(id: "colorSuccess500", name: "colorSuccess500", hex: NucleusColorTokens.colorSuccess500),
-            TokenSwatch(id: "colorSuccess600", name: "colorSuccess600", hex: NucleusColorTokens.colorSuccess600),
-            TokenSwatch(id: "colorSuccess700", name: "colorSuccess700", hex: NucleusColorTokens.colorSuccess700),
-            TokenSwatch(id: "colorSuccess800", name: "colorSuccess800", hex: NucleusColorTokens.colorSuccess800),
-            TokenSwatch(id: "colorSuccess900", name: "colorSuccess900", hex: NucleusColorTokens.colorSuccess900),
+            TokenSwatch(id: "colorSuccess100", name: "colorSuccess100", hex: AppNucleusColorTokens.colorSuccess100),
+            TokenSwatch(id: "colorSuccess200", name: "colorSuccess200", hex: AppNucleusColorTokens.colorSuccess200),
+            TokenSwatch(id: "colorSuccess300", name: "colorSuccess300", hex: AppNucleusColorTokens.colorSuccess300),
+            TokenSwatch(id: "colorSuccess400", name: "colorSuccess400", hex: AppNucleusColorTokens.colorSuccess400),
+            TokenSwatch(id: "colorSuccess500", name: "colorSuccess500", hex: AppNucleusColorTokens.colorSuccess500),
+            TokenSwatch(id: "colorSuccess600", name: "colorSuccess600", hex: AppNucleusColorTokens.colorSuccess600),
+            TokenSwatch(id: "colorSuccess700", name: "colorSuccess700", hex: AppNucleusColorTokens.colorSuccess700),
+            TokenSwatch(id: "colorSuccess800", name: "colorSuccess800", hex: AppNucleusColorTokens.colorSuccess800),
+            TokenSwatch(id: "colorSuccess900", name: "colorSuccess900", hex: AppNucleusColorTokens.colorSuccess900),
         ]
     ),
     TokenGroup(
         id: "info",
         name: "Info",
         tokens: [
-            TokenSwatch(id: "colorInfo100", name: "colorInfo100", hex: NucleusColorTokens.colorInfo100),
-            TokenSwatch(id: "colorInfo200", name: "colorInfo200", hex: NucleusColorTokens.colorInfo200),
-            TokenSwatch(id: "colorInfo300", name: "colorInfo300", hex: NucleusColorTokens.colorInfo300),
-            TokenSwatch(id: "colorInfo400", name: "colorInfo400", hex: NucleusColorTokens.colorInfo400),
-            TokenSwatch(id: "colorInfo500", name: "colorInfo500", hex: NucleusColorTokens.colorInfo500),
-            TokenSwatch(id: "colorInfo600", name: "colorInfo600", hex: NucleusColorTokens.colorInfo600),
-            TokenSwatch(id: "colorInfo700", name: "colorInfo700", hex: NucleusColorTokens.colorInfo700),
-            TokenSwatch(id: "colorInfo800", name: "colorInfo800", hex: NucleusColorTokens.colorInfo800),
-            TokenSwatch(id: "colorInfo900", name: "colorInfo900", hex: NucleusColorTokens.colorInfo900),
+            TokenSwatch(id: "colorInfo100", name: "colorInfo100", hex: AppNucleusColorTokens.colorInfo100),
+            TokenSwatch(id: "colorInfo200", name: "colorInfo200", hex: AppNucleusColorTokens.colorInfo200),
+            TokenSwatch(id: "colorInfo300", name: "colorInfo300", hex: AppNucleusColorTokens.colorInfo300),
+            TokenSwatch(id: "colorInfo400", name: "colorInfo400", hex: AppNucleusColorTokens.colorInfo400),
+            TokenSwatch(id: "colorInfo500", name: "colorInfo500", hex: AppNucleusColorTokens.colorInfo500),
+            TokenSwatch(id: "colorInfo600", name: "colorInfo600", hex: AppNucleusColorTokens.colorInfo600),
+            TokenSwatch(id: "colorInfo700", name: "colorInfo700", hex: AppNucleusColorTokens.colorInfo700),
+            TokenSwatch(id: "colorInfo800", name: "colorInfo800", hex: AppNucleusColorTokens.colorInfo800),
+            TokenSwatch(id: "colorInfo900", name: "colorInfo900", hex: AppNucleusColorTokens.colorInfo900),
         ]
     ),
 ]

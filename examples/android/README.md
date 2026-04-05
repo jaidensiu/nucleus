@@ -1,6 +1,9 @@
 # Android Example
 
-Android sample app that consumes the generated Android sources in `build/android`.
+Android sample app with two token source variants:
+
+- `local` wraps generated Kotlin sources from `build/android`
+- `package` resolves the Maven artifact `com.jaidensiu:nucleus`
 
 ## Requirements
 
@@ -9,6 +12,13 @@ Android sample app that consumes the generated Android sources in `build/android
 
 ## Open
 
-Run the root `npm run build` first so `build/android` exists. The demo wraps the generated Kotlin sources from `build/android/src/main/kotlin` in a local Android library module for IDE-friendly sync.
+Run the root `npm run build` first so `build/android` exists.
 
-Open `examples/android` in Android Studio and run the `app` configuration.
+Open `examples/android` in Android Studio.
+
+Use these build variants:
+
+- `localDebug` or `localRelease` for generated local sources
+- `packageDebug` or `packageRelease` for the Maven package
+
+The `package` variants resolve `com.jaidensiu:nucleus` from `mavenLocal()` first, then GitHub Packages. To use GitHub Packages, set `githubPackagesUser` and `githubPackagesToken` in your Gradle properties or `GITHUB_USER` / `GITHUB_TOKEN` in your environment.

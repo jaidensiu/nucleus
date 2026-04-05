@@ -2,6 +2,6 @@
 
 Native sample apps that consume the generated Nucleus build artifacts.
 
-- `android/` uses generated Kotlin sources from `build/android`.
-- `ios/` uses the generated Swift source file from `build/ios`.
-- `web/` uses generated CSS and JSON files from `build/web`.
+- `android/` supports `local` source-backed and `package` Maven-backed variants.
+- `ios/` supports local-source and Swift-package schemes against `build/ios`.
+- `web/` supports local-file and npm-package modes against `build/web`.

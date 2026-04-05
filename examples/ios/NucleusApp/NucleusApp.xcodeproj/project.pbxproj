@@ -11,6 +11,8 @@
 		A10000010000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000110000000000000002 /* ContentView.swift */; };
 		A10000010000000000000003 /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000110000000000000003 /* HexColor.swift */; };
 		A10000010000000000000004 /* NucleusColorTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000110000000000000005 /* NucleusColorTokens.swift */; };
+		A10000010000000000000005 /* NucleusTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000110000000000000006 /* NucleusTokens.swift */; };
+		A10000010000000000000006 /* Nucleus in Frameworks */ = {isa = PBXBuildFile; productRef = A10000A10000000000000001 /* Nucleus */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,7 @@
 		A10000110000000000000003 /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		A10000110000000000000004 /* NucleusApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NucleusApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10000110000000000000005 /* NucleusColorTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NucleusColorTokens.swift; path = ../../../build/ios/Sources/Nucleus/NucleusColorTokens.swift; sourceTree = SOURCE_ROOT; };
+		A10000110000000000000006 /* NucleusTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NucleusTokens.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A10000010000000000000006 /* Nucleus in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +50,7 @@
 				A10000110000000000000001 /* NucleusApp.swift */,
 				A10000110000000000000002 /* ContentView.swift */,
 				A10000110000000000000003 /* HexColor.swift */,
+				A10000110000000000000006 /* NucleusTokens.swift */,
 				A10000110000000000000005 /* NucleusColorTokens.swift */,
 			);
 			path = NucleusApp;
@@ -75,6 +80,9 @@
 			dependencies = (
 			);
 			name = NucleusApp;
+			packageProductDependencies = (
+				A10000A10000000000000001 /* Nucleus */,
+			);
 			productName = NucleusApp;
 			productReference = A10000110000000000000004 /* NucleusApp.app */;
 			productType = "com.apple.product-type.application";
@@ -103,6 +111,9 @@
 				Base,
 			);
 			mainGroup = A10000310000000000000001;
+			packageReferences = (
+				A10000A00000000000000001 /* XCLocalSwiftPackageReference "../../../build/ios" */,
+			);
 			productRefGroup = A10000310000000000000003 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -130,6 +141,7 @@
 				A10000010000000000000001 /* NucleusApp.swift in Sources */,
 				A10000010000000000000002 /* ContentView.swift in Sources */,
 				A10000010000000000000003 /* HexColor.swift in Sources */,
+				A10000010000000000000005 /* NucleusTokens.swift in Sources */,
 				A10000010000000000000004 /* NucleusColorTokens.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,7 +149,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		A10000810000000000000001 /* Debug */ = {
+		A10000810000000000000001 /* Debug Local */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -149,9 +161,9 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
-			name = Debug;
+			name = "Debug Local";
 		};
-		A10000810000000000000002 /* Release */ = {
+		A10000810000000000000002 /* Release Local */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -161,9 +173,9 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				SDKROOT = iphoneos;
 			};
-			name = Release;
+			name = "Release Local";
 		};
-		A10000810000000000000003 /* Debug */ = {
+		A10000810000000000000003 /* Debug Local */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -185,13 +197,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaidensiu.NucleusApp;
 				PRODUCT_NAME = NucleusApp;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) LOCAL_TOKENS";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = "Debug Local";
 		};
-		A10000810000000000000004 /* Release */ = {
+		A10000810000000000000004 /* Release Local */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -212,11 +225,95 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaidensiu.NucleusApp;
 				PRODUCT_NAME = NucleusApp;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) LOCAL_TOKENS";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Release;
+			name = "Release Local";
+		};
+		A10000810000000000000005 /* Debug Package */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = "Debug Package";
+		};
+		A10000810000000000000006 /* Release Package */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				SDKROOT = iphoneos;
+			};
+			name = "Release Package";
+		};
+		A10000810000000000000007 /* Debug Package */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Nucleus;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jaidensiu.NucleusApp;
+				PRODUCT_NAME = NucleusApp;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) PACKAGE_TOKENS";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug Package";
+		};
+		A10000810000000000000008 /* Release Package */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Nucleus;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jaidensiu.NucleusApp;
+				PRODUCT_NAME = NucleusApp;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) PACKAGE_TOKENS";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Release Package";
 		};
 /* End XCBuildConfiguration section */
 
@@ -224,22 +321,41 @@
 		A10000910000000000000001 /* Build configuration list for PBXProject "NucleusApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A10000810000000000000001 /* Debug */,
-				A10000810000000000000002 /* Release */,
+				A10000810000000000000001 /* Debug Local */,
+				A10000810000000000000002 /* Release Local */,
+				A10000810000000000000005 /* Debug Package */,
+				A10000810000000000000006 /* Release Package */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release Local";
 		};
 		A10000910000000000000002 /* Build configuration list for PBXNativeTarget "NucleusApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A10000810000000000000003 /* Debug */,
-				A10000810000000000000004 /* Release */,
+				A10000810000000000000003 /* Debug Local */,
+				A10000810000000000000004 /* Release Local */,
+				A10000810000000000000007 /* Debug Package */,
+				A10000810000000000000008 /* Release Package */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release Local";
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		A10000A00000000000000001 /* XCLocalSwiftPackageReference "../../../build/ios" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../build/ios;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A10000A10000000000000001 /* Nucleus */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A10000A00000000000000001 /* XCLocalSwiftPackageReference "../../../build/ios" */;
+			productName = Nucleus;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 	};
 	rootObject = A10000710000000000000001 /* Project object */;

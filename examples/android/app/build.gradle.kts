@@ -16,6 +16,17 @@ android {
         versionName = "1.0"
     }
 
+    flavorDimensions += "tokens"
+
+    productFlavors {
+        create("local") {
+            dimension = "tokens"
+        }
+        create("package") {
+            dimension = "tokens"
+        }
+    }
+
     buildFeatures {
         compose = true
     }
@@ -44,5 +55,9 @@ dependencies {
     implementation("com.google.android.material:material:1.12.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
 
-    implementation(project(":nucleus"))
+    add("localImplementation", project(":nucleus"))
+    add(
+        "packageImplementation",
+        "com.jaidensiu:nucleus:${providers.gradleProperty("nucleusPackageVersion").get()}",
+    )
 }

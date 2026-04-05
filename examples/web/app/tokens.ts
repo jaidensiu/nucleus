@@ -1,4 +1,10 @@
-import primitiveTokens from "../../../build/web/nucleus-color-tokens.json";
+import localPrimitiveTokens from "./token-source.local";
+import packagePrimitiveTokens from "./token-source.package";
+
+const primitiveTokens =
+  process.env.NEXT_PUBLIC_NUCLEUS_WEB_SOURCE === "package"
+    ? packagePrimitiveTokens
+    : localPrimitiveTokens;
 
 export interface ColorGroup {
   name: string;
