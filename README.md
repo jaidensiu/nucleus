@@ -40,9 +40,9 @@ Generated files appear in `build/`:
 
 | Path | Description |
 | ---- | ----------- |
-| `tokens/primitive/` | Raw token values that can be consumed directly today |
-| `tokens/semantic/` | Reserved for intent-based aliases |
-| `tokens/primitive/color/palette.json` | Current primitive color palette |
+| `src/tokens/primitive/` | Raw token values that can be consumed directly today |
+| `src/tokens/semantic/` | Reserved for intent-based aliases |
+| `src/tokens/primitive/color/palette.json` | Current primitive color palette |
 
 ## Generated Output
 
@@ -58,6 +58,12 @@ Generated files appear in `build/`:
 
 - `nucleus-color-tokens.css` – Primitive colors as CSS custom properties (`--nucleus-color-*`)
 - `nucleus-color-tokens.json` – JSON token file for programmatic use
+
+## Example Apps
+
+- `examples/android/` – Android demo app that wraps generated Kotlin sources from `build/android`
+- `examples/ios/` – iOS demo app that compiles the generated Swift file from `build/ios`
+- `examples/web/` – Web demo app that reads generated files from `build/web`
 
 ## CI/CD
 
@@ -164,7 +170,7 @@ import tokens from "@jaidensiu/nucleus/nucleus-color-tokens.json";
 
 ## Adding / Modifying Tokens
 
-1. Edit the relevant JSON file in `tokens/`
+1. Edit the relevant JSON file in `src/tokens/`
 2. Run `npm run build` to verify output
 3. Open a PR with a release label (`patch`, `minor`, or `major`)
 4. On merge, CI auto-tags and publishes to all three platforms
