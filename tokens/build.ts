@@ -2,47 +2,40 @@ import StyleDictionary from 'style-dictionary';
 import { cpSync, mkdirSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import type { Format, TransformedToken } from 'style-dictionary/types';
+import type { Format, NameTransform, TransformedToken } from 'style-dictionary/types';
 
-import { composeColorObject } from '../formats/compose.js';
-import { swiftColorDefaults } from '../formats/swift.js';
-import { cssColorVariables, jsonFlat } from '../formats/css.js';
+import { composeColorObject } from '../formats/android.js';
+import { swiftColorDefaults } from '../formats/ios.js';
+import { kebabCasePath } from '../formats/shared.js';
+import { cssColorVariables, jsonFlat } from '../formats/web.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-
-// ---------------------------------------------------------------------------
-// Register all custom formats
-// ---------------------------------------------------------------------------
+const nameTransform: NameTransform = {
+  name: 'name/nucleus',
+  type: 'name',
+  transform: (token) => kebabCasePath(token.path),
+};
 const allFormats: Format[] = [
   composeColorObject,
   swiftColorDefaults,
   cssColorVariables,
   jsonFlat,
 ];
-
-// ---------------------------------------------------------------------------
-// Token source paths
-// ---------------------------------------------------------------------------
-const sources: string[] = [
-  'tokens/color/primitive/palette.json',
+const baseSources: string[] = [
+  'tokens/primitive/**/*.json',
+  'tokens/semantic/**/*.json',
 ];
-
-// ---------------------------------------------------------------------------
-// Output paths
-// ---------------------------------------------------------------------------
 const androidOut = 'build/android/src/main/kotlin/com/jaidensiu/nucleus';
 const iosOut = 'build/ios/Sources/Nucleus';
 const webOut = 'build/web';
 
-// ---------------------------------------------------------------------------
-// Build primitive color tokens
-// ---------------------------------------------------------------------------
 async function buildTokens(): Promise<void> {
   const sd = new StyleDictionary({
-    source: sources,
+    source: baseSources,
     platforms: {
       android: {
         buildPath: `${androidOut}/`,
+        transforms: [nameTransform.name],
         files: [
           {
             destination: 'NucleusColorTokens.kt',
@@ -55,6 +48,7 @@ async function buildTokens(): Promise<void> {
       },
       ios: {
         buildPath: `${iosOut}/`,
+        transforms: [nameTransform.name],
         files: [
           {
             destination: 'NucleusColorTokens.swift',
@@ -66,6 +60,7 @@ async function buildTokens(): Promise<void> {
       },
       web: {
         buildPath: `${webOut}/`,
+        transforms: [nameTransform.name],
         files: [
           {
             destination: 'nucleus-color-tokens.css',
@@ -84,18 +79,15 @@ async function buildTokens(): Promise<void> {
     },
   });
 
-  // Register custom formats
   for (const fmt of allFormats) {
     sd.registerFormat(fmt);
   }
+  sd.registerTransform(nameTransform);
 
   await sd.buildAllPlatforms();
-  console.log('\u2713 Tokens built');
+  console.log('\n\u2713 Tokens built');
 }
 
-// ---------------------------------------------------------------------------
-// Copy static template files into build/
-// ---------------------------------------------------------------------------
 interface TemplateCopy {
   from: string;
   to: string;
@@ -138,11 +130,8 @@ function copyTemplates(): void {
   console.log('\u2713 Templates copied');
 }
 
-// ---------------------------------------------------------------------------
-// Main
-// ---------------------------------------------------------------------------
 async function main(): Promise<void> {
-  console.log('Building Nucleus tokens\u2026\n');
+  console.log('Building Nucleus tokens\u2026');
   await buildTokens();
   copyTemplates();
   console.log('\nDone!');

@@ -10,7 +10,9 @@ Live at [nucleus.vercel.app](https://nucleus.vercel.app).
 npm install
 ```
 
-The website resolves the palette token JSON from this repo's generated `build/web/` output during local development. Run the root `nucleus` build first.
+The website resolves the generated primitive token JSON from this repo's `build/web/` output during local development. Run the root `nucleus` build first.
+
+At the moment the site documents the primitive color layer only.
 
 ## Development
 

@@ -1,17 +1,9 @@
 import primitiveTokens from "../../build/web/nucleus-color-tokens.json";
 
-// ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
-
 export interface ColorGroup {
   name: string;
   colors: { name: string; value: string }[];
 }
-
-// ---------------------------------------------------------------------------
-// Primitive colors — parsed from nucleus-color-tokens.json
-// ---------------------------------------------------------------------------
 
 const primitiveGroupOrder = [
   "Grey",

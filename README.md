@@ -4,7 +4,9 @@ Cross-platform design tokens that define the foundational UI layer and visual id
 
 ## Architecture
 
-**Primitive tokens** – Raw palette values (grey, error, warning, success, info). Theme-agnostic.
+**Source layers are tiered** – `primitive/` and `semantic/` are separate directories so new token layers can be added without restructuring the repo.
+
+**Primitive colors are the current public API** – Raw palette values (grey, error, warning, success, info) are intentionally consumable in this milestone.
 
 **Platform outputs are standalone** – no dependency on app-specific types. Android gets Compose `Color` objects; iOS gets raw hex `String` constants; Web gets CSS custom properties and JSON files. The consuming app bridges these to its own types.
 
@@ -34,11 +36,13 @@ Generated files appear in `build/`:
 | iOS      | `build/ios/`     | Standalone Swift enums with hex string constants, `Package.swift` for SPM           |
 | Web      | `build/web/`     | CSS custom properties, JSON token files, `package.json` for npm publishing          |
 
-## Token Files
+## Token Source Layout
 
-| File                               | Description                                  |
-| ---------------------------------- | -------------------------------------------- |
-| `tokens/color/primitive/palette.json` | Grey, error, warning, success, info palettes |
+| Path | Description |
+| ---- | ----------- |
+| `tokens/primitive/` | Raw token values that can be consumed directly today |
+| `tokens/semantic/` | Reserved for intent-based aliases |
+| `tokens/primitive/color/palette.json` | Current primitive color palette |
 
 ## Generated Output
 
