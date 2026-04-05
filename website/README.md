@@ -10,7 +10,7 @@ Live at [nucleus.vercel.app](https://nucleus.vercel.app).
 npm install
 ```
 
-The website depends on `@jaidensiu/nucleus` from GitHub Packages. A `.npmrc` is included to configure the registry. You need a `GITHUB_TOKEN` environment variable with `read:packages` scope.
+The website resolves the palette token JSON from this repo's generated `build/web/` output during local development. Run the root `nucleus` build first.
 
 ## Development
 

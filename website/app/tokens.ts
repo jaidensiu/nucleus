@@ -1,4 +1,4 @@
-import primitiveTokens from "@jaidensiu/nucleus/tokens.json";
+import primitiveTokens from "../../build/web/nucleus-color-tokens.json";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -10,7 +10,7 @@ export interface ColorGroup {
 }
 
 // ---------------------------------------------------------------------------
-// Primitive colors — parsed from tokens.json
+// Primitive colors — parsed from nucleus-color-tokens.json
 // ---------------------------------------------------------------------------
 
 const primitiveGroupOrder = [

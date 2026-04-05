@@ -38,22 +38,22 @@ Generated files appear in `build/`:
 
 | File                               | Description                                  |
 | ---------------------------------- | -------------------------------------------- |
-| `tokens/color/primitive/base.json` | Grey, error, warning, success, info palettes |
+| `tokens/color/primitive/palette.json` | Grey, error, warning, success, info palettes |
 
 ## Generated Output
 
 ### Android
 
-- `NucleusColorPalette` – Primitive colors as `Color` objects
+- `NucleusColorTokens` – Primitive colors as `Color` objects
 
 ### iOS
 
-- `NucleusColorPalette` – Primitive colors as hex `String` constants
+- `NucleusColorTokens` – Primitive colors as hex `String` constants
 
 ### Web
 
-- `nucleus-color-palette.css` – Primitive colors as CSS custom properties (`--nucleus-color-*`)
-- `tokens.json` – JSON token file for programmatic use
+- `nucleus-color-tokens.css` – Primitive colors as CSS custom properties (`--nucleus-color-*`)
+- `nucleus-color-tokens.json` – JSON token file for programmatic use
 
 ## CI/CD
 
@@ -92,7 +92,7 @@ Then add the dependency:
 implementation "com.jaidensiu:nucleus:<version>"
 ```
 
-Access primitive colors via `NucleusColorPalette`.
+Access primitive colors via `NucleusColorTokens`.
 
 ### iOS
 
@@ -120,7 +120,7 @@ Access primitive colors as hex strings:
 ```swift
 import Nucleus
 
-let hex = NucleusColorPalette.colorGrey900 // "181818"
+let hex = NucleusColorTokens.colorGrey900 // "181818"
 ```
 
 ### Web
@@ -140,7 +140,7 @@ npm install @jaidensiu/nucleus
 **CSS custom properties** – import the stylesheet:
 
 ```css
-@import "@jaidensiu/nucleus/nucleus-color-palette.css";
+@import "@jaidensiu/nucleus/nucleus-color-tokens.css";
 ```
 
 Then use the variables:
@@ -155,7 +155,7 @@ Then use the variables:
 **JSON tokens** – import directly for JS/TS usage:
 
 ```ts
-import tokens from "@jaidensiu/nucleus/tokens.json";
+import tokens from "@jaidensiu/nucleus/nucleus-color-tokens.json";
 ```
 
 ## Adding / Modifying Tokens

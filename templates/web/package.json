@@ -2,7 +2,7 @@
   "name": "@jaidensiu/nucleus",
   "description": "Nucleus design tokens for Web — CSS custom properties and JSON",
   "license": "UNLICENSED",
-  "main": "tokens.json",
+  "main": "nucleus-color-tokens.json",
   "types": "index.d.ts",
   "files": [
     "*.css",

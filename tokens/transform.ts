@@ -24,7 +24,7 @@ const allFormats: Format[] = [
 // Token source paths
 // ---------------------------------------------------------------------------
 const sources: string[] = [
-  'tokens/color/primitive/base.json',
+  'tokens/color/primitive/palette.json',
 ];
 
 // ---------------------------------------------------------------------------
@@ -45,9 +45,9 @@ async function buildTokens(): Promise<void> {
         buildPath: `${androidOut}/`,
         files: [
           {
-            destination: 'NucleusColorPalette.kt',
+            destination: 'NucleusColorTokens.kt',
             format: 'compose/colorObject',
-            options: { objectName: 'NucleusColorPalette' },
+            options: { objectName: 'NucleusColorTokens' },
             filter: (token: TransformedToken) =>
               token.$type === 'color' && token.path[0] === 'color',
           },
@@ -57,7 +57,7 @@ async function buildTokens(): Promise<void> {
         buildPath: `${iosOut}/`,
         files: [
           {
-            destination: 'NucleusColorPalette.swift',
+            destination: 'NucleusColorTokens.swift',
             format: 'swift/nucleusColorDefaults',
             filter: (token: TransformedToken) =>
               token.$type === 'color' && token.path[0] === 'color',
@@ -68,13 +68,13 @@ async function buildTokens(): Promise<void> {
         buildPath: `${webOut}/`,
         files: [
           {
-            destination: 'nucleus-color-palette.css',
+            destination: 'nucleus-color-tokens.css',
             format: 'css/colorVariables',
             filter: (token: TransformedToken) =>
               token.$type === 'color' && token.path[0] === 'color',
           },
           {
-            destination: 'tokens.json',
+            destination: 'nucleus-color-tokens.json',
             format: 'json/flat',
             filter: (token: TransformedToken) =>
               token.$type === 'color' && token.path[0] === 'color',
